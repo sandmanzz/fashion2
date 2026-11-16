@@ -7,10 +7,10 @@
 
 export default {
   "seo": {
-    "title": "Brand Name — Collection",
+    "title": "ONDO 온도 — Daily & Work Wear",
     "description": "Placeholder description."
   },
-  "tagline": "Your tagline goes here",
+  "tagline": "Warmth in everyday wear",
   "navigation": {
     "ctas": [
       {
@@ -33,12 +33,12 @@ export default {
     "label": "Intro",
     "intro": {
       "video": "",
-      "poster": "/placeholders/video-hero-intro.svg",
+      "poster": "/images/brand/01-hero-street.webp",
       "ctaPrimary": "Enter"
     },
     "scroll": {
       "video": "",
-      "poster": "/placeholders/video-hero-scroll.svg",
+      "poster": "/images/brand/02-store-entrance.webp",
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua: ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor.",
       "label": "Scroll"
     }
@@ -80,9 +80,9 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-02.svg",
-                    "width": 3297,
-                    "height": 5000,
+                    "src": "/images/brand/03-woman-office.webp",
+                    "width": 1280,
+                    "height": 1920,
                     "alt": null
                   },
                   "title": "Lorem ipsum dolor",
@@ -93,9 +93,9 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-03.svg",
-                    "width": 3333,
-                    "height": 5000,
+                    "src": "/images/brand/04-man-hanok.webp",
+                    "width": 1280,
+                    "height": 1920,
                     "alt": null
                   },
                   "title": "Sit amet consectetur",
@@ -125,9 +125,9 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-04.svg",
-                    "width": 3673,
-                    "height": 4591,
+                    "src": "/images/brand/05-flatlay.webp",
+                    "width": 1440,
+                    "height": 1920,
                     "alt": null
                   },
                   "title": "Adipiscing elit sed",
@@ -204,9 +204,9 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-07.svg",
-                    "width": 4000,
-                    "height": 2990,
+                    "src": "/images/brand/06-atelier.webp",
+                    "width": 1920,
+                    "height": 1440,
                     "alt": "Placeholder image"
                   },
                   "title": "Incididunt ut labore",
@@ -467,21 +467,21 @@ export default {
     "cursorLabel2": "Watch the film",
     "video": "",
     "videoMobile": "",
-    "poster": "/placeholders/video-film.svg"
+    "poster": "/images/brand/10-rooftop.webp"
   },
   "collection": {
     "title1": "Discover",
     "title2": "the full collection",
     "image1": {
-      "src": "/placeholders/img-59.svg",
-      "width": 3000,
-      "height": 4500,
+      "src": "/images/brand/07-woman-gallery.webp",
+      "width": 1280,
+      "height": 1920,
       "alt": null
     },
     "image2": {
-      "src": "/placeholders/img-60.svg",
-      "width": 3250,
-      "height": 4874,
+      "src": "/images/brand/08-man-stairs.webp",
+      "width": 1280,
+      "height": 1920,
       "alt": "Placeholder image"
     },
     "imageMobile": {
@@ -908,9 +908,9 @@ export default {
     "subtitle1": "Brand\nOne",
     "subtitle2": "Brand\nTwo",
     "image": {
-      "src": "/placeholders/img-23.svg",
-      "width": 4459,
-      "height": 2720,
+      "src": "/images/brand/09-group.webp",
+      "width": 1920,
+      "height": 1080,
       "alt": "Placeholder image"
     },
     "shopTFC": {
