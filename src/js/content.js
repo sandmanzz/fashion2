@@ -1380,5 +1380,187 @@ export default {
       "en": "Every ONDO collection is named by a single Korean word: a time, a material, a season, a feeling. Together they make one wardrobe.",
       "ko": "온도의 모든 컬렉션은 하나의 한국어 단어로 이름 짓습니다. 시간, 소재, 계절, 그리고 감정. 여덟 개가 모여 하나의 옷장이 됩니다."
     }
+  },
+  "materials": {
+    "label": {
+      "en": "Materials",
+      "ko": "소재"
+    },
+    "eyebrow": {
+      "en": "What it’s made of",
+      "ko": "무엇으로 만드는가"
+    },
+    "title": {
+      "en": "Six reasons it lasts",
+      "ko": "오래가는 여섯 가지 이유"
+    },
+    "hint": {
+      "en": "Scroll to open each detail",
+      "ko": "스크롤하면 디테일이 하나씩 열립니다"
+    },
+    "garments": [
+      {
+        "slug": "gyeol-chore-jacket",
+        "name": {
+          "en": "Gyeol Chore Jacket",
+          "ko": "결 초어 재킷"
+        },
+        "image": "/images/materials/jacket.webp"
+      },
+      {
+        "slug": "bit-oxford-shirt",
+        "name": {
+          "en": "Bit Oxford Shirt",
+          "ko": "빛 옥스퍼드 셔츠"
+        },
+        "image": "/images/materials/shirt.webp"
+      }
+    ],
+    "spots": [
+      {
+        "garment": 0,
+        "x": 30,
+        "y": 43,
+        "image": "/images/materials/twill.webp",
+        "title": {
+          "en": "12oz cotton twill",
+          "ko": "12oz 코튼 트윌"
+        },
+        "specs": [
+          {
+            "en": "Woven in Daegu",
+            "ko": "대구 직조"
+          },
+          {
+            "en": "Pre-washed",
+            "ko": "선세탁"
+          }
+        ],
+        "text": {
+          "en": "A dense diagonal weave that starts firm and softens with every wash. Pre-washed so it keeps its shape, never stiff on day one.",
+          "ko": "촘촘한 사선 직조. 처음엔 단단하고 세탁할수록 부드러워집니다. 선세탁으로 형태를 유지하며, 첫날부터 뻣뻣하지 않습니다."
+        }
+      },
+      {
+        "garment": 0,
+        "x": 35,
+        "y": 23,
+        "image": "/images/materials/topstitch.webp",
+        "title": {
+          "en": "Double contrast topstitch",
+          "ko": "더블 대비 스티치"
+        },
+        "specs": [
+          {
+            "en": "Flat-felled seams",
+            "ko": "쌈솔 봉제"
+          },
+          {
+            "en": "Cotton-poly thread",
+            "ko": "코튼-폴리 실"
+          }
+        ],
+        "text": {
+          "en": "Every seam is folded and stitched twice, so there are no raw edges inside. The brown thread is our one visible signature.",
+          "ko": "모든 솔기를 접어 두 번 박아 안쪽에 시접이 드러나지 않습니다. 브라운 실은 우리의 유일한 시그니처입니다."
+        }
+      },
+      {
+        "garment": 0,
+        "x": 51,
+        "y": 49,
+        "image": "/images/materials/corozo.webp",
+        "title": {
+          "en": "Corozo nut buttons",
+          "ko": "코로조 너트 단추"
+        },
+        "specs": [
+          {
+            "en": "Plant-based",
+            "ko": "식물성"
+          },
+          {
+            "en": "Each one unique",
+            "ko": "모두 다른 무늬"
+          }
+        ],
+        "text": {
+          "en": "Carved from the tagua palm nut instead of plastic. Hard as bone, naturally grained, and slowly polished by your hands.",
+          "ko": "플라스틱 대신 타구아 야자 열매를 깎아 만들었습니다. 뼈처럼 단단하고, 자연스러운 결이 있으며, 손길에 서서히 윤이 납니다."
+        }
+      },
+      {
+        "garment": 0,
+        "x": 77,
+        "y": 63,
+        "image": "/images/materials/bartack.webp",
+        "title": {
+          "en": "Bar-tack reinforcement",
+          "ko": "바택 보강"
+        },
+        "specs": [
+          {
+            "en": "42 stitches per tack",
+            "ko": "바택당 42땀"
+          },
+          {
+            "en": "At every stress point",
+            "ko": "모든 하중 지점"
+          }
+        ],
+        "text": {
+          "en": "Pocket corners take the most strain, so each one is locked with a dense bar-tack. It is why the pockets outlive the trend.",
+          "ko": "주머니 모서리는 가장 많은 힘을 받습니다. 그래서 촘촘한 바택으로 고정합니다. 주머니가 유행보다 오래가는 이유입니다."
+        }
+      },
+      {
+        "garment": 1,
+        "x": 30,
+        "y": 57,
+        "image": "/images/materials/oxford.webp",
+        "title": {
+          "en": "Brushed oxford cloth",
+          "ko": "기모 옥스퍼드"
+        },
+        "specs": [
+          {
+            "en": "Long-staple cotton",
+            "ko": "장섬유 면"
+          },
+          {
+            "en": "Fades evenly",
+            "ko": "고르게 바램"
+          }
+        ],
+        "text": {
+          "en": "A basket weave of slightly slubby yarns, lightly brushed for a soft hand. It fades evenly, so it looks better at year three than at week one.",
+          "ko": "살짝 슬러브진 실로 짠 바스켓 조직을 가볍게 기모 처리했습니다. 고르게 바래서 첫 주보다 삼 년째에 더 멋스럽습니다."
+        }
+      },
+      {
+        "garment": 1,
+        "x": 51,
+        "y": 31,
+        "image": "/images/materials/piping.webp",
+        "title": {
+          "en": "Black piping",
+          "ko": "블랙 파이핑"
+        },
+        "specs": [
+          {
+            "en": "Hand-set",
+            "ko": "수작업 부착"
+          },
+          {
+            "en": "Placket + cuffs",
+            "ko": "플라켓 + 커프스"
+          }
+        ],
+        "text": {
+          "en": "A single black line runs down the placket and around the cuffs: the quiet detail that makes it an ONDO shirt without a single logo.",
+          "ko": "플라켓과 커프스를 따라 흐르는 한 줄의 블랙 라인. 로고 하나 없이도 온도의 셔츠임을 알려주는 조용한 디테일입니다."
+        }
+      }
+    ]
   }
 };

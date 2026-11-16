@@ -16,12 +16,16 @@ import {
 } from './js/components/blocks.js';
 import { esc } from './js/core/utils.js';
 import { collectionsHTML, initCollections } from './js/components/collections.js';
+import { materialsHTML, initMaterials } from './js/components/materials.js';
+import { isV2 } from './js/ui-version.js';
+import './styles/materials.css';
 
 const slug = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
 // Page composition — reorder / remove blocks here.
 const blocks = [
-  { key: 'shirts', html: shirtsHTML, init: initShirts, nav: false },
+  // V2 replaces the decorative product reveal with the material tour
+  isV2 ? { key: 'materials', html: materialsHTML, init: initMaterials, nav: true } : { key: 'shirts', html: shirtsHTML, init: initShirts, nav: false },
   { key: 'story', html: (d) => storyHTML(d, content.tagline), init: initStory, nav: true },
   { key: 'video', html: filmHTML, init: initFilm, nav: false },
   { key: 'collection', html: collectionHTML, init: initCollection, nav: true },

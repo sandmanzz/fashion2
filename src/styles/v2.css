@@ -89,3 +89,15 @@ html[data-ui='v2'] .nav-mini.is-hidden { opacity: 0; transform: translateY(-10px
 html[data-ui='v2'] .nav-mini.is-open { background: var(--color-dark-gold); }
 html[data-ui='v2'] .nav-mini__icon { display: inline-flex; width: 19px; }
 html[data-ui='v2'] .pdp-bag-pill { top: 4.2rem; }
+
+/* V2 — first item of each chapter: push it right + down so it has a moment fully
+   on screen (with air above it) before the vertical hand-off starts moving it. */
+@media (min-width: 961px) {
+  html[data-ui='v2'] .chapter__panels > .panel--normal:first-child > .bg-marble + .panel-content {
+    margin-left: 22vw;
+    padding-top: clamp(4.5rem, 4.5rem + 0.03 * (100vw - 402px), 7.5rem);
+  }
+  html[data-ui='v2'] .chapter__panels > .panel--normal:first-child > .bg-marble + .panel-content .panel-content__media {
+    max-height: calc(var(--vh, 1vh) * 100 - 13rem);
+  }
+}
