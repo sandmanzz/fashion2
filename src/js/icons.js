@@ -1,0 +1,22 @@
+// Generic icons + placeholder logos (replace logoA / logoB / partner with your marks).
+import { ornament, wordmark, emblem } from './svg-brand.js';
+
+const withClass = (svg, cls) => (cls ? svg.replace('<svg ', `<svg class="${cls}" `) : svg);
+
+export const icon = {
+  ornament: (cls) => withClass(ornament, cls),
+  wordmark: (cls) => withClass(wordmark, cls),
+  emblem: (cls) => withClass(emblem, cls),
+  logoA: (cls) => withClass(`<svg width="71" height="71" viewBox="0 0 71 71" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="35.5" cy="35.5" r="33.5" stroke="currentColor" stroke-width="3"/><circle cx="35.5" cy="35.5" r="27" stroke="currentColor" stroke-width="1"/><text x="35.5" y="36" fill="currentColor" font-family="Times New Roman,serif" font-size="20" letter-spacing="1" text-anchor="middle" dominant-baseline="middle">A</text></svg>`, cls),
+  logoB: (cls) => withClass(`<svg width="64" height="73" viewBox="0 0 64 73" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M32 2 L62 10 V38 C62 56 49 66 32 71 C15 66 2 56 2 38 V10 Z" stroke="currentColor" stroke-width="3"/><text x="32" y="37" fill="currentColor" font-family="Times New Roman,serif" font-size="22" text-anchor="middle" dominant-baseline="middle">B</text></svg>`, cls),
+  partner: (cls) => withClass(`<svg width="97" height="35" viewBox="0 0 97 35" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="95" height="33" rx="16.5" stroke="currentColor" stroke-width="2"/><text x="48.5" y="18.5" fill="currentColor" font-family="Helvetica,Arial,sans-serif" font-size="11" letter-spacing="2" text-anchor="middle" dominant-baseline="middle">PARTNER</text></svg>`, cls),
+  team: (letter) => `<svg width="66" height="66" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="33" cy="33" r="31" stroke="currentColor" stroke-width="2"/><text x="33" y="34" fill="currentColor" font-family="Helvetica,Arial,sans-serif" font-size="22" text-anchor="middle" dominant-baseline="middle">${letter}</text></svg>`,
+  burger: (open = false) => `<svg class="icon-burger${open ? ' icon-burger--open' : ''}" width="19" height="10" viewBox="0 0 19 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon-burger__top" d="M18.6465 0V1.908L18.0465 1.716H0.588L0 1.908V0L0.588 0.192H18.0465L18.6465 0Z" fill="currentColor"/><path class="icon-burger__mid" d="M18.6465 3.90802V5.81602L18.0465 5.62402H0.588L0 5.81602V3.90802L0.588 4.10002H18.0465L18.6465 3.90802Z" fill="currentColor"/><path class="icon-burger__bot" d="M18.6465 7.81598V9.72398L18.0465 9.53198H0.588L0 9.72398V7.81598L0.588 8.00798H18.0465L18.6465 7.81598Z" fill="currentColor"/></svg>`,
+  close: () => `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.5"/></svg>`,
+  play: () => `<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L13 8L1 15V1Z" fill="currentColor"/></svg>`,
+  plus: () => `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 0V14M0 7H14" stroke="currentColor" stroke-width="1.5"/></svg>`,
+  cart: () => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1H3L5 11H13L15 4H4" stroke="currentColor" stroke-width="1.3"/><circle cx="6" cy="14" r="1.2" fill="currentColor"/><circle cx="12" cy="14" r="1.2" fill="currentColor"/></svg>`,
+  arrow: () => `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.4"/></svg>`,
+  social: (name) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="1" y="1" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.3"/><text x="8" y="8.6" fill="currentColor" font-family="Helvetica,Arial,sans-serif" font-size="6" text-anchor="middle" dominant-baseline="middle">${(name || '?')[0]}</text></svg>`,
+  rotate: () => `<svg width="174" height="163" viewBox="0 0 174 163" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="13" y="83" width="124" height="74" rx="4" stroke="#F0E3CF" stroke-width="6" opacity=".2"/><rect x="95" y="36" width="76" height="124" rx="4" stroke="#F0E3CF" stroke-width="6"/><path d="M26 60 A34 34 0 0 1 64 28 M56 18 L66 28 L54 36" stroke="#F0E3CF" stroke-width="5"/></svg>`,
+};

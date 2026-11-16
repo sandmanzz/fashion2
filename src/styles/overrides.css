@@ -1,0 +1,4 @@
+/* Overrides for the placeholder artwork (original logos had baked-in fills). */
+.nav__header__logo { color: var(--color-dark-gold); }
+.nav__header__logo svg { height: auto; max-width: 100%; }
+.ticket__inner__row__logos svg { color: var(--color-dark-gold); }
