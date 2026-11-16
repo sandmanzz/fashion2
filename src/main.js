@@ -1,5 +1,7 @@
 import './styles/main.css';
 import './styles/overrides.css';
+import './styles/v2.css';
+import { mountSwitcher } from './js/ui-version.js';
 import content from './js/content.js';
 import { scroll, setVh } from './js/core/scroll.js';
 import { set } from './js/core/store.js';
@@ -61,3 +63,5 @@ document.querySelectorAll('picture img').forEach((im) => {
   const done = () => im.classList.add('is-loaded');
   im.complete && im.naturalWidth ? done() : im.addEventListener('load', done, { once: true });
 });
+
+mountSwitcher();

@@ -5,6 +5,7 @@ import { icon } from '../icons.js';
 import { scroll } from '../core/scroll.js';
 import { get as storeGet } from '../core/store.js';
 import { esc, nl2br, isTablet, charAnim, nextTick } from '../core/utils.js';
+import { isV2 } from '../ui-version.js';
 
 /* ------------------------------------------------------------------ Button */
 export function buttonPrimary({ label, url, variant = 'transparent', gtm, team, tag }) {
@@ -287,14 +288,33 @@ export function initChapterTitle(root, title, scrollSpeed = 1) {
 }
 
 /* ---------------------------------------------------------- Chapter header */
-export function chapterHeader(chapter, variant) {
+export function chapterHeader(chapter, variant, meta = {}) {
   const onArch = variant === 'on-arch';
+  if (isV2) return chapterHeaderV2(chapter, onArch, meta);
   const light = chapter.bgColor === 'light-gold';
   const vars = onArch
     ? '--color-bg:var(--color-dark-gray);--color-logo:var(--color-light-gold);--color:var(--color-light-gold);'
     : `--color-bg:${light ? 'var(--color-light-gold)' : 'var(--color-dark-gray)'};--color-logo:${light ? 'var(--color-dark-gold)' : 'var(--color-light-gold)'};--color:${light ? 'var(--color-dark-gray)' : 'var(--color-dark-gold)'};`;
   const tag = onArch ? 'span' : 'h2';
   return `<div class="chapter-header${onArch ? ' chapter-header--on-arch' : ''}" style="${vars}"${onArch ? ' aria-hidden="true"' : ''}><span class="chapter-header__line"></span><div class="chapter-header__top"><span>${esc(chapter.title)}</span>${icon.wordmark()}<span>${esc(chapter.title)}</span></div><div class="chapter-header__bottom">${icon.ornament()}<${tag} class="chapter-header__bottom__tag">${esc(chapter.label)}</${tag}>${icon.ornament()}</div></div>`;
+}
+
+/** V2 — editorial header: index · Korean chapter word · brand. One hairline, no mirrored wordmark. */
+function chapterHeaderV2(chapter, onArch, { index = 0, total = 1 } = {}) {
+  const light = chapter.bgColor === 'light-gold';
+  const vars = onArch
+    ? '--color-bg:var(--color-dark-gray);--color-logo:var(--color-light-gold);--color:var(--color-light-gold);'
+    : `--color-bg:${light ? 'var(--color-light-gold)' : 'var(--color-dark-gray)'};--color-logo:${light ? 'var(--color-dark-gold)' : 'var(--color-light-gold)'};--color:${light ? 'var(--color-dark-gray)' : 'var(--color-light-gold)'};`;
+  const pad = (n) => String(n).padStart(2, '0');
+  const tag = onArch ? 'span' : 'h2';
+  return `<div class="chapter-header chapter-header--v2${onArch ? ' chapter-header--on-arch' : ''}" style="${vars}"${onArch ? ' aria-hidden="true"' : ''}>
+    <div class="chv2__row">
+      <span class="chv2__index"><b>${pad(index + 1)}</b><i></i>${pad(total)}</span>
+      <${tag} class="chv2__title"><span class="chv2__ko">${esc(chapter.korean || chapter.title)}</span><span class="chv2__en">${esc(chapter.label)} — ${esc(chapter.keyword || chapter.title)}</span></${tag}>
+      <span class="chv2__brand">ONDO<small>온도</small></span>
+    </div>
+    <span class="chv2__rule"></span>
+  </div>`;
 }
 
 /* ------------------------------------------------------------- Media tags */

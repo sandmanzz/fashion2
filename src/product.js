@@ -4,6 +4,8 @@
 import './styles/main.css';
 import './styles/overrides.css';
 import './styles/product.css';
+import './styles/v2.css';
+import { mountSwitcher } from './js/ui-version.js';
 import gsap from 'gsap';
 import content from './js/content.js';
 import products, { formatPrice } from './js/products.js';
@@ -168,3 +170,5 @@ document.querySelectorAll('picture img').forEach((im) => {
   im.complete && im.naturalWidth ? done() : im.addEventListener('load', done, { once: true });
 });
 void isTablet;
+
+mountSwitcher();

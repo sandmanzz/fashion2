@@ -1,0 +1,71 @@
+/* ===========================================================================
+   UI switcher + V2 "ONDO" direction.
+   Everything V2 is scoped under html[data-ui="v2"] so V1 stays untouched.
+=========================================================================== */
+
+/* ---------------------------------------------------------------- switcher */
+.ui-switcher {
+  position: fixed; left: 1rem; bottom: 1rem; z-index: 300;
+  display: flex; align-items: center; gap: 0.25rem; padding: 0.3rem;
+  background: rgba(58, 58, 58, 0.92); backdrop-filter: blur(6px);
+  border: 1px solid var(--color-dark-gold); border-radius: 999px;
+  font-family: var(--font-display); letter-spacing: 0.14em; color: var(--color-light-gold);
+}
+.ui-switcher__label { font-size: 0.7rem; padding: 0 0.5rem 0 0.6rem; opacity: 0.7; }
+.ui-switcher button {
+  display: flex; flex-direction: column; align-items: center; line-height: 1;
+  border: 0; border-radius: 999px; padding: 0.45rem 0.85rem; cursor: pointer;
+  background: transparent; color: inherit; font: inherit; font-size: 0.9rem; letter-spacing: 0.14em;
+  transition: background 0.3s, color 0.3s;
+}
+.ui-switcher button small { font-family: var(--font-serif); font-size: 0.6rem; letter-spacing: 0.04em; opacity: 0.7; margin-top: 0.15rem; }
+.ui-switcher button.is-active { background: var(--color-dark-gold); color: var(--color-cta-gray); }
+.ui-switcher button:not(.is-active):hover { background: rgba(240, 227, 207, 0.12); }
+
+/* ---------------------------------------------------- V2: chapter header */
+.chapter-header--v2 { padding: clamp(0.9rem, 0.9rem + 0.006 * (100vw - 402px), 1.5rem) clamp(1rem, 1rem + 0.012 * (100vw - 402px), 2.5rem) 0; }
+.chv2__row {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; width: 100%;
+  color: var(--color);
+}
+.chv2__index { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-display); font-size: 0.95rem; letter-spacing: 0.18em; color: var(--color); opacity: 0.85; }
+.chv2__index b { font-weight: 400; font-size: clamp(1.6rem, 1.6rem + 0.012 * (100vw - 402px), 2.6rem); letter-spacing: 0.04em; color: var(--color-logo); opacity: 1; }
+.chv2__index i { display: block; width: clamp(1.5rem, 1.5rem + 0.02 * (100vw - 402px), 3.5rem); height: 1px; background: currentColor; }
+.chv2__title { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; margin: 0; font-weight: 400; }
+.chv2__ko {
+  font-family: 'Noto Serif KR', var(--font-serif); font-weight: 300;
+  font-size: clamp(2.4rem, 2.4rem + 0.03 * (100vw - 402px), 4.6rem); line-height: 1; letter-spacing: 0.08em; color: var(--color-logo);
+}
+.chv2__en { font-family: var(--font-display); font-size: clamp(0.7rem, 0.7rem + 0.002 * (100vw - 402px), 0.9rem); letter-spacing: 0.3em; text-transform: uppercase; color: var(--color); }
+.chv2__brand { justify-self: end; display: flex; align-items: baseline; gap: 0.5rem; font-family: var(--font-serif); letter-spacing: 0.45em; font-size: 0.85rem; color: var(--color); }
+.chv2__brand small { font-family: 'Noto Serif KR', var(--font-serif); letter-spacing: 0.1em; color: var(--color-logo); font-size: 0.85rem; }
+.chv2__rule { position: relative; display: block; width: 100%; height: 1px; margin-top: clamp(0.8rem, 0.8rem + 0.005 * (100vw - 402px), 1.2rem); background: var(--color); opacity: 0.6; }
+.chv2__rule::after { content: ''; position: absolute; left: 50%; top: -1px; width: 3.5rem; height: 3px; transform: translateX(-50%); background: var(--color-logo); }
+@media (max-width: 960px) {
+  .chv2__row { grid-template-columns: auto 1fr; gap: 0.8rem; }
+  .chv2__title { align-items: flex-start; }
+  .chv2__brand { display: none; }
+}
+
+/* ------------------------------------------------ V2: chapter title (outline) */
+html[data-ui='v2'] .chapter-archs--v2 .chapter-title__char,
+html[data-ui='v2'] .chapter-archs--v2 .chapter-title__sep {
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 8rem + 0.14 * (100vw - 402px), 19rem);
+  letter-spacing: 0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-dark-gold);
+}
+html[data-ui='v2'] .chapter-archs--v2 .chapter-title__sep { padding: 0 0.15em; }
+html[data-ui='v2'] .chapter-archs--v2 .chapter-title__copy { transform: translateY(18%); }
+/* inside the window the same letters turn solid — outline outside, filled inside */
+html[data-ui='v2'] .chapter-archs--v2 .chapter-archs__title-clip .chapter-title__char,
+html[data-ui='v2'] .chapter-archs--v2 .chapter-archs__title-clip .chapter-title__sep {
+  color: var(--color-light-gold);
+  -webkit-text-stroke: 0;
+}
+
+/* ------------------------------------------------- V2: story navigator pill */
+html[data-ui='v2'] .nav-story__toggle { border-radius: 999px; padding: 0.25rem; box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.45); }
+html[data-ui='v2'] .nav-story__toggle__inner { border: 0; border-radius: 999px; background: var(--color-cta-gray); color: var(--color-light-gold); }
+html[data-ui='v2'] .nav-story__toggle--inverted .nav-story__toggle__inner { background: var(--color-dark-gold); color: var(--color-cta-gray); }

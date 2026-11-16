@@ -8,6 +8,7 @@ import { scroll } from '../core/scroll.js';
 import { observe, allSections } from '../core/sections.js';
 import { get, set, on } from '../core/store.js';
 import { isTablet, esc, nl2br, zoomed, charAnim, nextTick, transition } from '../core/utils.js';
+import { isV2 } from '../ui-version.js';
 import { icon } from '../icons.js';
 import {
   bgMarble, initMarble, chapterHeader, chapterTitle, initChapterTitle,
@@ -101,15 +102,18 @@ function archSourceHTML(arc) {
   return `<img src="${esc(arc.poster)}" alt="">`;
 }
 
-function chapterArchsHTML(arc) {
+const titleText = (ch) => (isV2 ? (ch.keyword || ch.title).toUpperCase() : ch.title);
+
+function chapterArchsHTML(arc, index = 0, total = 1) {
   const ch = arc.chapter;
-  return `<div class="chapter-archs">
-    ${chapterHeader(ch)}
-    <div class="chapter-archs__header-clip" aria-hidden="true">${chapterHeader(ch, 'on-arch')}</div>
+  const meta = { index, total };
+  return `<div class="chapter-archs${isV2 ? ' chapter-archs--v2' : ''}">
+    ${chapterHeader(ch, undefined, meta)}
+    <div class="chapter-archs__header-clip" aria-hidden="true">${chapterHeader(ch, 'on-arch', meta)}</div>
     <canvas class="chapter-archs__canvas" aria-hidden="true"></canvas>
     <div class="chapter-archs__sources" aria-hidden="true">${archSourceHTML(arc)}</div>
-    ${chapterTitle(ch.title)}
-    <div class="chapter-archs__title-clip" aria-hidden="true">${chapterTitle(ch.title)}</div>
+    ${chapterTitle(titleText(ch))}
+    <div class="chapter-archs__title-clip" aria-hidden="true">${chapterTitle(titleText(ch))}</div>
   </div>`;
 }
 
@@ -133,18 +137,46 @@ function initChapterArchs(root, { title, cols = 5, panSteps = 0 }) {
     const v = d ? `path('${d}')` : '';
     if (v !== clip) { clip = v; headerClip.style.clipPath = v; titleClipWrap.style.clipPath = v; }
   };
+  // V1 = Roman arch. V2 = hanok window (창): soft-cornered frame with a 창살 lattice.
   const archPath = (x, y, w, h) => {
-    const p = new Path2D(), r = w / 2;
+    const p = new Path2D();
+    if (isV2) { p.roundRect(x, y, w, h, Math.min(w, h) * 0.035); return p; }
+    const r = w / 2;
     p.moveTo(x, y + r);
     p.ellipse(x + r, y + r, r, r, 0, Math.PI, 0, false);
     p.lineTo(x + w, y + h); p.lineTo(x, y + h); p.closePath();
     return p;
   };
-  const setArch = (i, x, y, w, on, opacity = 0.08) => {
+  const svgPath = (x, y, w, h) => {
+    if (isV2) {
+      const r = Math.min(w, h) * 0.035;
+      return [`M ${x + r} ${y}`, `H ${x + w - r}`, `A ${r} ${r} 0 0 1 ${x + w} ${y + r}`, `V ${y + h - r}`, `A ${r} ${r} 0 0 1 ${x + w - r} ${y + h}`, `H ${x + r}`, `A ${r} ${r} 0 0 1 ${x} ${y + h - r}`, `V ${y + r}`, `A ${r} ${r} 0 0 1 ${x + r} ${y}`, 'Z'].join(' ');
+    }
+    const r = w / 2;
+    return [`M ${x} ${y + r}`, `A ${w / 2} ${r} 0 0 1 ${x + w} ${y + r}`, `V ${y + h}`, `H ${x}`, 'Z'].join(' ');
+  };
+  // V2: frames step down away from the centre, forming a soft curve instead of a flat arcade.
+  const stagger = (i) => (isV2 ? Math.abs(i - mid) * aH * 0.09 : 0);
+  const setArch = (i, x, y, w, on, opacity = 0.08, lattice = 1) => {
     if (!on) { paths[i] = ''; arches[i] = null; return; }
-    const h = w * ARCH_RATIO, r = w / 2;
-    paths[i] = [`M ${x} ${y + r}`, `A ${w / 2} ${r} 0 0 1 ${x + w} ${y + r}`, `V ${y + h}`, `H ${x}`, 'Z'].join(' ');
-    arches[i] = { x, y, w, h, opacity };
+    const h = w * ARCH_RATIO;
+    paths[i] = svgPath(x, y, w, h);
+    arches[i] = { x, y, w, h, opacity, lattice };
+  };
+  const drawLattice = (ctx, a) => {
+    if (!isV2 || a.lattice <= 0.01) return;
+    const inset = a.w * 0.06;
+    ctx.save();
+    ctx.globalAlpha = a.lattice;
+    ctx.strokeStyle = 'rgba(240, 227, 207, 0.55)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(a.x + inset, a.y + inset, a.w - inset * 2, a.h - inset * 2, a.w * 0.02);
+    const cx = a.x + a.w / 2;
+    ctx.moveTo(cx, a.y + inset); ctx.lineTo(cx, a.y + a.h - inset);
+    [0.34, 0.66].forEach((k) => { ctx.moveTo(a.x + inset, a.y + a.h * k); ctx.lineTo(a.x + a.w - inset, a.y + a.h * k); });
+    ctx.stroke();
+    ctx.restore();
   };
   const source = () => {
     if (videoEl && videoEl.readyState >= 2) return videoEl;
@@ -162,6 +194,7 @@ function initChapterArchs(root, { title, cols = 5, panSteps = 0 }) {
       const p = archPath(a.x, a.y, a.w, a.h);
       if (src) { ctx.save(); ctx.clip(p); ctx.drawImage(src, 0, 0, vw, vh); ctx.restore(); }
       ctx.save(); ctx.globalAlpha = a.opacity; ctx.fillStyle = '#000'; ctx.fill(p); ctx.restore();
+      drawLattice(ctx, a);
       ctx.save(); ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.stroke(p); ctx.restore();
     }
   };
@@ -193,7 +226,7 @@ function initChapterArchs(root, { title, cols = 5, panSteps = 0 }) {
   function applyBase() {
     ensure();
     const o = panOffset();
-    for (let i = 0; i < cols; i++) setArch(i, centers[i] + o - aW / 2, cy - aH / 2, aW, true, 0.08);
+    for (let i = 0; i < cols; i++) setArch(i, centers[i] + o - aW / 2, cy - aH / 2 + stagger(i), aW, true, 0.08);
     applyClip(); draw(); startLoop();
   }
   stroke = getComputedStyle(document.documentElement).getPropertyValue('--color-dark-gold').trim() || '#c3a677';
@@ -206,7 +239,7 @@ function initChapterArchs(root, { title, cols = 5, panSteps = 0 }) {
     applyPan(t) {
       ensure();
       const o = panOffset() * (1 - t);
-      for (let i = 0; i < cols; i++) setArch(i, centers[i] + o - aW / 2, cy - aH / 2, aW, true, 0.08);
+      for (let i = 0; i < cols; i++) setArch(i, centers[i] + o - aW / 2, cy - aH / 2 + stagger(i), aW, true, 0.08);
       applyClip(); draw();
     },
     applyZoom(t) {
@@ -216,15 +249,15 @@ function initChapterArchs(root, { title, cols = 5, panSteps = 0 }) {
       const x = centers[mid] + t * (vw / 2 - centers[mid]) - w / 2;
       const y = cy + t * (vh / 2 - cy) - (w * ARCH_RATIO) / 2;
       for (let i = 0; i < cols; i++) {
-        if (i === mid) setArch(i, x, y, w, true, 0.08 + 0.4 * t);
-        else setArch(i, centers[i] + (i < mid ? -vw : vw) * t - aW / 2, cy - aH / 2, aW, t < 0.5, 0.08);
+        if (i === mid) setArch(i, x, y, w, true, 0.08 + 0.4 * t, 1 - t);
+        else setArch(i, centers[i] + (i < mid ? -vw : vw) * t - aW / 2, cy - aH / 2 + stagger(i), aW, t < 0.5, 0.08);
       }
       applyClip(); draw(); titleA.reveal(t); titleB.reveal(t);
     },
     applyZoomFull(t = 0) {
       ensure();
       const full = 1.3 * Math.max(vw, vh / ARCH_RATIO);
-      for (let i = 0; i < cols; i++) i === mid ? setArch(i, (vw - full) / 2, (vh - full * ARCH_RATIO) / 2, full, true, 0.48) : setArch(i, 0, 0, 0, false);
+      for (let i = 0; i < cols; i++) i === mid ? setArch(i, (vw - full) / 2, (vh - full * ARCH_RATIO) / 2, full, true, 0.48, 0) : setArch(i, 0, 0, 0, false);
       applyClip(); draw(); startLoop();
       titleA.reveal(1); titleA.setScrollX(t); titleB.reveal(1); titleB.setScrollX(t);
     },
@@ -237,7 +270,7 @@ function chapterHTML(arc, i, n) {
   const ch = arc.chapter;
   return `<div class="chapter" style="background-color:var(--color-${ch.bgColor});z-index:${n - i};">
     <div class="chapter__track">
-      <div class="chapter__parallax">${bgMarble({ bgColor: ch.bgColor, fixed: true })}${chapterArchsHTML(arc)}</div>
+      <div class="chapter__parallax">${bgMarble({ bgColor: ch.bgColor, fixed: true })}${chapterArchsHTML(arc, i, n)}</div>
       <div class="chapter__panels">${ch.panels.map(panelHTML).join('')}</div>
     </div>
   </div>`;
@@ -250,7 +283,7 @@ function initChapter(el, arc, { index, isLast, label }) {
   const panelsWrap = el.querySelector('.chapter__panels');
   const sectionProgress = { value: -1 };
   el.querySelectorAll('.bg-marble').forEach((m) => initMarble(m, sectionProgress));
-  const archs = initChapterArchs(el.querySelector('.chapter-archs'), { title: arc.chapter.title, cols: 5, panSteps: 0 });
+  const archs = initChapterArchs(el.querySelector('.chapter-archs'), { title: titleText(arc.chapter), cols: 5, panSteps: 0 });
   initPanelContents(el);
   let vw = 0, vh = 0, panelW = 0, state = null, last = -1, slides = [];
 
@@ -334,7 +367,7 @@ function chapterMobileHTML(arc, i, panSteps) {
   const ch = arc.chapter;
   return `<section class="chapter-mobile" style="background-color:var(--color-${ch.bgColor})">
     <div class="chapter-mobile__zoom-area" style="--zoom-area-height: calc(var(--vh, 1vh) * ${200 + 50 * panSteps})">
-      <div class="chapter-mobile__sticky">${bgMarble({ bgColor: ch.bgColor })}${chapterArchsHTML(arc)}</div>
+      <div class="chapter-mobile__sticky">${bgMarble({ bgColor: ch.bgColor })}${chapterArchsHTML(arc, i, 3)}</div>
     </div>
     ${ch.panels.map(panelHTML).join('')}
   </section>`;
@@ -343,7 +376,7 @@ function chapterMobileHTML(arc, i, panSteps) {
 function initChapterMobile(el, arc, { index, blockLabel, label, panSteps }) {
   observe(el, label);
   el.querySelectorAll('.bg-marble').forEach((m) => initMarble(m));
-  const archs = initChapterArchs(el.querySelector('.chapter-archs'), { title: arc.chapter.title, cols: 3, panSteps });
+  const archs = initChapterArchs(el.querySelector('.chapter-archs'), { title: titleText(arc.chapter), cols: 3, panSteps });
   initPanelContents(el);
   let vh = 0, top = 0, state = null, contents = [], centers = [], vw = 0;
   const onScroll = ({ scroll: y }) => {
