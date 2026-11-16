@@ -6,6 +6,7 @@ import { allSections, activeAmong, onSectionsChange } from '../core/sections.js'
 import { icon } from '../icons.js';
 import { bgMarble, buttonPrimary } from './common.js';
 import { esc } from '../core/utils.js';
+import { t } from '../i18n.js';
 
 /* ------------------------------------------------------------------ Loader */
 let required = 1, ready = 0, timerDone = false, resolveReady = null;
@@ -59,6 +60,7 @@ export function initScrollThumb(el) {
 export function navHTML(content) {
   const ctas = (content.navigation?.ctas || []).map((c, i) => buttonPrimary({ label: c.label, url: c.url, variant: 'cta-gray', team: i === 0 ? 'tfc' : 'st' })).join('');
   return `<div class="nav__trigger" style="display:none"></div>
+<button class="nav-mini" type="button" aria-label="${t('menu')}"><span class="nav-mini__label">${t('menu')}</span><span class="nav-mini__icon">${icon.burger()}</span></button>
 <nav class="nav nav--hidden">
   <div class="nav__overlay"></div>
   <div class="nav__header"><div class="nav__header__inner">
@@ -74,7 +76,10 @@ export function navHTML(content) {
 }
 
 /** labels: section labels shown in the menu (displayInNavigation). */
-export function initNav(root, labels, { onHome, external = false } = {}) {
+export function initNav(root, items, { onHome, external = false } = {}) {
+  // items: [{ label, id }] — label shown in the menu, id = stable block anchor
+  const labels = items.map((x) => (typeof x === 'string' ? x : x.label));
+  const ids = items.map((x) => (typeof x === 'string' ? null : x.id));
   const slugify = (t) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   const nav = root.querySelector('nav.nav');
   const trigger = root.querySelector('.nav__trigger');
@@ -92,6 +97,8 @@ export function initNav(root, labels, { onHome, external = false } = {}) {
     nav.className = `nav ${open ? 'nav--open' : ''} ${hidden ? 'nav--hidden' : ''}`;
     trigger.style.display = heroOpen() ? '' : 'none';
     toggle.innerHTML = icon.burger(open);
+    const mi = root.querySelector('.nav-mini');
+    if (mi) { mi.querySelector('.nav-mini__icon').innerHTML = icon.burger(open); mi.classList.toggle('is-open', open); mi.classList.toggle('is-hidden', !heroOpen()); }
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   };
@@ -137,13 +144,15 @@ export function initNav(root, labels, { onHome, external = false } = {}) {
   };
   on('nav-open', (v) => { if (v !== open) setOpen(v); });
   toggle.addEventListener('click', () => setOpen(!open));
+  const mini = root.querySelector('.nav-mini');
+  mini?.addEventListener('click', () => setOpen(!open));
   nav.querySelector('.nav__overlay').addEventListener('click', () => setOpen(false));
   window.addEventListener('keydown', (e) => e.key === 'Escape' && setOpen(false));
   ul.addEventListener('mouseleave', syncActive);
   buttons.forEach((b, i) => {
     b.addEventListener('mouseenter', () => moveFollower(i));
     b.addEventListener('click', () => {
-      if (external) { location.href = '/#' + slugify(labels[i]); return; }
+      if (external) { location.href = `/${location.search}#${ids[i] || slugify(labels[i])}`; return; }
       forced = labels[i];
       moveFollower(i);
       setOpen(false);
@@ -188,7 +197,7 @@ export function initMobileLandscape(root) {
     const v = touch && matchMedia('(max-width: 1024px)').matches && matchMedia('(orientation: landscape)').matches;
     if (v === shown) return;
     shown = v;
-    root.innerHTML = v ? `<div class="mobile-landscape"><span class="mobile-landscape__text">Please rotate<br>your phone</span>${icon.rotate()}</div>` : '';
+    root.innerHTML = v ? `<div class="mobile-landscape"><span class="mobile-landscape__text">${t('rotate')}</span>${icon.rotate()}</div>` : '';
     if (!get('hero-entered', false)) return;
     if (v) { saved = window.scrollY; scroll.scrollTo(0, { immediate: true }); scroll.stop(); }
     else setTimeout(() => { window.scrollTo({ top: saved, behavior: 'instant' }); scroll.start(); requestAnimationFrame(() => scroll.scrollTo(saved, { immediate: true })); }, 350);

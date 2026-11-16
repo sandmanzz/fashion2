@@ -5,9 +5,10 @@ import './styles/main.css';
 import './styles/overrides.css';
 import './styles/product.css';
 import './styles/v2.css';
+import './styles/collections.css';
 import { mountSwitcher } from './js/ui-version.js';
 import gsap from 'gsap';
-import content from './js/content.js';
+import content from './js/site.js';
 import products, { formatPrice } from './js/products.js';
 import { scroll, setVh } from './js/core/scroll.js';
 import { set } from './js/core/store.js';
@@ -19,6 +20,7 @@ import {
 import { footerHTML, createModal } from './js/components/blocks.js';
 import { esc, range, isTablet } from './js/core/utils.js';
 import { icon } from './js/icons.js';
+import { t } from './js/i18n.js';
 
 const slug = new URLSearchParams(location.search).get('p') || products[0].slug;
 const product = products.find((p) => p.slug === slug) || products[0];
@@ -26,13 +28,13 @@ const others = products.filter((p) => p !== product);
 document.title = `${product.name} — ONDO 온도`;
 setVh();
 
-const letters = (t, cls) => [...t].map((c) => `<span class="${cls}"><span>${c === ' ' ? '&nbsp;' : esc(c)}</span></span>`).join('');
+const letters = (txt, cls) => txt.split(' ').map((w) => `<span class="pdp__title__word">${[...w].map((c) => `<span class="${cls}"><span>${esc(c)}</span></span>`).join('')}</span>`).join(' ');
 
 const app = document.getElementById('app');
 app.innerHTML = `
   <div class="scroll-thumb"></div>
   ${navHTML(content)}
-  <div class="pdp-bag-pill" aria-live="polite"><span>Bag</span><b>0</b></div>
+  <div class="pdp-bag-pill" aria-live="polite"><span>${t('bag')}</span><b>0</b></div>
   <main class="pdp">
     ${bgMarble({ bgColor: 'light-gold' })}
     <section class="pdp__main">
@@ -48,16 +50,16 @@ app.innerHTML = `
           <span class="pdp__rule pdp-reveal"></span>
           <p class="pdp__desc body-s-style pdp-reveal">${esc(product.description)}</p>
           <div class="pdp__opt pdp-reveal">
-            <div class="pdp__opt__label">Colour <b class="pdp__color-name">${esc(product.colors[0].name)}</b></div>
+            <div class="pdp__opt__label">${t('colour')} <b class="pdp__color-name">${esc(product.colors[0].name)}</b></div>
             <div class="pdp__swatches">${product.colors.map((c, i) => `<button class="pdp__swatch${i === 0 ? ' is-active' : ''}" style="--sw:${c.hex}" data-name="${esc(c.name)}" aria-label="${esc(c.name)}"></button>`).join('')}</div>
           </div>
           <div class="pdp__opt pdp-reveal">
-            <div class="pdp__opt__label">Size <button class="pdp__guide" type="button">Size guide</button></div>
+            <div class="pdp__opt__label">${t('size')} <button class="pdp__guide" type="button">${t('sizeGuide')}</button></div>
             <div class="pdp__sizes">${product.sizes.map((s) => `<button class="pdp__size" type="button">${esc(s)}</button>`).join('')}</div>
           </div>
-          <div class="pdp__cta pdp-reveal">${buttonPrimary({ label: 'Add to bag', variant: 'cta-gray', tag: 'button' })}<p class="pdp__hint">Select a size</p></div>
+          <div class="pdp__cta pdp-reveal">${buttonPrimary({ label: t('addToBag'), variant: 'cta-gray', tag: 'button' })}<p class="pdp__hint">${t('selectSize')}</p></div>
           <div class="pdp__acc pdp-reveal">
-            ${[['Details', `<ul>${product.details.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>`], ['Fabric & care', `<p>${esc(product.care)}</p>`], ['Shipping & returns', '<p>Free shipping on orders over ₩150,000. Free returns within 14 days.</p>']]
+            ${[[t('details'), `<ul>${product.details.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>`], [t('care'), `<p>${esc(product.care)}</p>`], [t('shipping'), `<p>${t('shippingText')}</p>`]]
               .map(([t, b], i) => `<div class="pdp__acc__item${i === 0 ? ' is-open' : ''}"><button class="pdp__acc__head" type="button">${t}<span class="pdp__acc__icon">${icon.plus()}</span></button><div class="pdp__acc__body"><div class="pdp__acc__content">${b}</div></div></div>`).join('')}
           </div>
         </div>
@@ -67,9 +69,9 @@ app.innerHTML = `
     <section class="pdp__marquee">${chapterTitle(`${product.name.split(' ')[0]} ${product.korean}`)}</section>
 
     <section class="pdp__related">
-      <div class="pdp__related__head"><span class="pdp__related__line"></span><h2>Worn with</h2><span class="pdp__related__line"></span></div>
+      <div class="pdp__related__head"><span class="pdp__related__line"></span><h2>${t('wornWith')}</h2><span class="pdp__related__line"></span></div>
       <div class="pdp__related__grid">
-        ${others.map((p) => `<a class="pdp__card" href="/product.html?p=${p.slug}">${mouseFollower({ content: `<div class="pdp__card__media"><img src="${esc(p.images[1].src)}" alt="${esc(p.name)}" loading="lazy"></div>`, label1: 'View', label2: 'the product', icon: 'IconPlus', blend: true })}<div class="pdp__card__meta"><span>${esc(p.name)} <i>${esc(p.korean)}</i></span><span>${formatPrice(p.price)}</span></div></a>`).join('')}
+        ${others.map((p) => `<a class="pdp__card" href="/product.html?p=${p.slug}">${mouseFollower({ content: `<div class="pdp__card__media"><img src="${esc(p.images[1].src)}" alt="${esc(p.name)}" loading="lazy"></div>`, label1: t('view'), label2: t('theProduct'), icon: 'IconPlus', blend: true })}<div class="pdp__card__meta"><span>${esc(p.name)} <i>${esc(p.korean)}</i></span><span>${formatPrice(p.price)}</span></div></a>`).join('')}
       </div>
     </section>
     ${footerHTML(content.footer)}
@@ -79,7 +81,7 @@ app.innerHTML = `
 scroll.init();
 set('hero-text-open', true);
 initScrollThumb(app.querySelector('.scroll-thumb'));
-initNav(app, ['Story', 'Collection', 'Tickets', 'Press', 'Shops'], { external: true });
+initNav(app, [['story', content.story.label], ['collections', t('collections')], ['collection', content.collection.label], ['weekend', content.weekend.label], ['medias', content.medias.label], ['shops', content.shops.label]].map(([id, label]) => ({ id, label })), { external: true });
 app.querySelectorAll('.bg-marble').forEach((m) => initMarble(m));
 
 /* ------------------------------------------------------- intro motion */
@@ -119,7 +121,7 @@ const hint = app.querySelector('.pdp__hint');
 app.querySelectorAll('.pdp__size').forEach((b) => b.addEventListener('click', () => {
   size = b.textContent;
   app.querySelectorAll('.pdp__size').forEach((x) => x.classList.toggle('is-active', x === b));
-  hint.textContent = `Size ${size} selected`;
+  hint.textContent = t('sizeSelected', { s: size });
   hint.classList.remove('is-error');
 }));
 app.querySelectorAll('.pdp__acc__head').forEach((h) => h.addEventListener('click', () => {
@@ -137,11 +139,11 @@ let bag = [];
 try { bag = JSON.parse(localStorage.getItem('ondo-bag') || '[]'); } catch { bag = []; }
 const renderPill = () => { pill.querySelector('b').textContent = String(bag.length); pill.classList.toggle('is-visible', bag.length > 0); };
 renderPill();
-const bagHTML = () => `<div class="pdp-bag"><span class="h4-style">Your bag</span>${bag.length ? bag.map((b) => `<div class="pdp-bag__row"><img src="${esc(b.img)}" alt=""><div><b>${esc(b.name)}</b><span>${esc(b.color)} · ${esc(b.size)}</span><span>${formatPrice(b.price)}</span></div></div>`).join('') + `<div class="pdp-bag__total"><span>Total</span><b>${formatPrice(bag.reduce((a, b) => a + b.price, 0))}</b></div>${buttonPrimary({ label: 'Checkout', variant: 'cta-gray', tag: 'button' })}` : '<p class="body-s-style">Your bag is empty.</p>'}</div>`;
+const bagHTML = () => `<div class="pdp-bag"><span class="h4-style">${t('yourBag')}</span>${bag.length ? bag.map((b) => `<div class="pdp-bag__row"><img src="${esc(b.img)}" alt=""><div><b>${esc(b.name)}</b><span>${esc(b.color)} · ${esc(b.size)}</span><span>${formatPrice(b.price)}</span></div></div>`).join('') + `<div class="pdp-bag__total"><span>${t('total')}</span><b>${formatPrice(bag.reduce((a, b) => a + b.price, 0))}</b></div>${buttonPrimary({ label: t('checkout'), variant: 'cta-gray', tag: 'button' })}` : `<p class="body-s-style">${t('empty')}</p>`}</div>`;
 pill.addEventListener('click', () => bagModal.open(true, bagHTML()));
 app.querySelector('.pdp__cta .btn-primary').addEventListener('click', () => {
   if (!size) {
-    hint.textContent = 'Please select a size';
+    hint.textContent = t('pleaseSelect');
     hint.classList.add('is-error');
     gsap.fromTo('.pdp__sizes', { x: -6 }, { x: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
     return;

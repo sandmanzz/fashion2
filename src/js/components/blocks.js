@@ -12,6 +12,8 @@ import {
   buttonCursor, initButtonCursor, chapterTitle, initChapterTitle, picture, img, video,
 } from './common.js';
 import { buttonCircular } from './story.js';
+import { t, LANG } from '../i18n.js';
+import { ondoMark } from '../svg-logo.js';
 
 /* ================================================================ Modal */
 export function createModal({ align = 'right' } = {}) {
@@ -290,15 +292,17 @@ export function initCollection(root, d) {
 /* =============================================================== Event */
 function ticketHTML(t, over) {
   const [a, b] = t.teams;
-  const date = (s) => new Date(s.replace(' ', 'T')).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase();
-  const hour = (s) => new Date(s.replace(' ', 'T')).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  const loc = LANG === 'ko' ? 'ko-KR' : 'en-GB';
+  const date = (s) => new Date(s.replace(' ', 'T')).toLocaleDateString(loc, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase();
+  const hour = (s) => new Date(s.replace(' ', 'T')).toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit' });
+  const logo = (k) => (k === 'mark' ? ondoMark() : k === 'seal' ? icon.logoB() : icon.team(k));
   const desk = `<div class="ticket__inner"${isTablet() ? ' style="display:none;"' : ''}>
-      <div class="ticket__inner__row"><div class="ticket__inner__row__logos">${icon.team(a.logo)}</div><div class="ticket__inner__row__name"><span>${esc(a.name)}</span>${over ? `<span>${t.scoreToulouse ?? '–'}</span>` : ''}</div>${!over && t.date ? `<div class="ticket__inner__row__date"><span>${date(t.date)}</span><span>${hour(t.date)}</span></div>` : ''}</div>
-      <div class="ticket__inner__row"><div class="ticket__inner__row__logos">${icon.team(b.logo)}</div><div class="ticket__inner__row__name"><span>${esc(b.name)}</span>${over ? `<span>${t.scoreOpponent ?? '–'}</span>` : ''}</div></div>
+      <div class="ticket__inner__row"><div class="ticket__inner__row__logos">${logo(a.logo)}</div><div class="ticket__inner__row__name"><span>${esc(a.name)}</span>${over ? `<span>${t.scoreToulouse ?? '–'}</span>` : ''}</div>${!over && t.date ? `<div class="ticket__inner__row__date"><span>${date(t.date)}</span><span>${hour(t.date)}</span></div>` : ''}</div>
+      <div class="ticket__inner__row"><div class="ticket__inner__row__logos">${logo(b.logo)}</div><div class="ticket__inner__row__name"><span>${esc(b.name)}</span>${over ? `<span>${t.scoreOpponent ?? '–'}</span>` : ''}</div></div>
       ${!over && t.cta ? `<div class="ticket__inner__row">${buttonPrimary({ label: t.cta.label, url: t.cta.url, variant: 'cta-gray' })}</div>` : ''}
     </div>`;
   const mob = `<div class="ticket__inner"${isTablet() ? '' : ' style="display:none;"'}>
-      <div class="ticket__inner__row"><div class="ticket__inner__row__logos">${icon.team(a.logo)}${icon.team(b.logo)}</div><div class="ticket__inner__row__name"><span>${esc(a.name)}</span></div><div class="ticket__inner__row__name light"><span>${esc(b.name)}</span></div>${over ? `<div class="ticket__inner__row__score"><span>${t.scoreToulouse ?? '–'} : ${t.scoreOpponent ?? '–'}</span></div>` : ''}</div>
+      <div class="ticket__inner__row"><div class="ticket__inner__row__logos">${logo(a.logo)}${logo(b.logo)}</div><div class="ticket__inner__row__name"><span>${esc(a.name)}</span></div><div class="ticket__inner__row__name light"><span>${esc(b.name)}</span></div>${over ? `<div class="ticket__inner__row__score"><span>${t.scoreToulouse ?? '–'} : ${t.scoreOpponent ?? '–'}</span></div>` : ''}</div>
     </div>`;
   return `<div class="ticket ${over ? 'ticket--over' : ''}"><span class="ticket__lines"></span>${desk}${mob}<span class="ticket__lines"></span></div>`;
 }
@@ -370,7 +374,7 @@ export function mediasHTML(d) {
   const item = (it, i) => {
     const clickable = it.modal;
     const media = it.type === 'video' ? video({ src: it.src, cls: 'block-medias__item__video', loop: true }) : picture({ src: it.src, alt: it.alt, width: it.width, height: it.height, cls: 'block-medias__item__image' });
-    return clickable ? mouseFollower({ content: media, label1: 'Read', label2: 'more', blend: true, centered: true }) : media;
+    return clickable ? mouseFollower({ content: media, label1: t('read'), label2: t('more'), blend: true, centered: true }) : media;
   };
   if (isTablet()) {
     return `<section class="block-medias"><h2 class="sr-only">${esc(d.label)}</h2><div class="block-medias__mobile">

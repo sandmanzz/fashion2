@@ -9,6 +9,7 @@ import { observe, allSections } from '../core/sections.js';
 import { get, set, on } from '../core/store.js';
 import { isTablet, esc, nl2br, zoomed, charAnim, nextTick, transition } from '../core/utils.js';
 import { isV2 } from '../ui-version.js';
+import { t } from '../i18n.js';
 import { icon } from '../icons.js';
 import {
   bgMarble, initMarble, chapterHeader, chapterTitle, initChapterTitle,
@@ -76,7 +77,7 @@ function initPanelContents(root) {
     const measure = () => mf.setModalHeight(modal.offsetHeight);
     async function setOpen(v) {
       open = v;
-      mf.btn.setLabels(v ? 'Close' : l1, v ? 'Close' : l2, v ? 'IconClose' : undefined);
+      mf.btn.setLabels(v ? t('close') : l1, v ? t('close') : l2, v ? 'IconClose' : undefined);
       if (!v) follower.querySelector('.btn-cursor__icon').innerHTML = icon.plus();
       mf.setFrozen(v);
       if (!modal) return;
@@ -430,7 +431,7 @@ function navStoryHTML(chapters, tagline) {
     <div class="nav-story__panel">
       ${branding({ tagline, small: true })}
       <div class="nav-story__list"><div class="nav-story__follower">${icon.ornament()}${icon.ornament()}</div>
-        <ul>${chapters.map((c, i) => `<li class="nav-story__item"><button class="${i === 0 ? 'active' : ''}"><span class="nav-story__item__label">${esc(c.label)}</span><span class="nav-story__item__title">${esc(c.title)}</span></button></li>`).join('')}</ul>
+        <ul>${chapters.map((c, i) => `<li class="nav-story__item"><button class="${i === 0 ? 'active' : ''}"><span class="nav-story__item__label">${esc(c.label)}${c.korean ? ` · ${esc(c.korean)}` : ''}</span><span class="nav-story__item__title">${esc(c.title)}</span>${c.subtitle ? `<span class="nav-story__item__sub">${esc(c.subtitle)}</span>` : ''}</button></li>`).join('')}</ul>
       </div>
       ${bgMarble({ bgColor: 'dark-gray' })}
     </div>

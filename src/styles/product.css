@@ -100,3 +100,5 @@
   .pdp__related__grid { grid-template-columns: 1fr 1fr; }
   .pdp__related__grid .pdp__card:last-child { display: none; }
 }
+
+.pdp__title__word { display: inline-block; white-space: nowrap; }

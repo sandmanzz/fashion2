@@ -1,8 +1,9 @@
 import './styles/main.css';
 import './styles/overrides.css';
 import './styles/v2.css';
+import './styles/collections.css';
 import { mountSwitcher } from './js/ui-version.js';
-import content from './js/content.js';
+import content from './js/site.js';
 import { scroll, setVh } from './js/core/scroll.js';
 import { set } from './js/core/store.js';
 import { loaderHTML, initLoader, initScrollThumb, navHTML, initNav, initMobileLandscape } from './js/components/shell.js';
@@ -14,6 +15,7 @@ import {
   mediasHTML, initMedias, shopsHTML, initShops, footerHTML,
 } from './js/components/blocks.js';
 import { esc } from './js/core/utils.js';
+import { collectionsHTML, initCollections } from './js/components/collections.js';
 
 const slug = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
@@ -23,6 +25,7 @@ const blocks = [
   { key: 'story', html: (d) => storyHTML(d, content.tagline), init: initStory, nav: true },
   { key: 'video', html: filmHTML, init: initFilm, nav: false },
   { key: 'collection', html: collectionHTML, init: initCollection, nav: true },
+  { key: 'collections', html: collectionsHTML, init: initCollections, nav: true },
   { key: 'weekend', html: weekendHTML, init: initWeekend, nav: true },
   { key: 'medias', html: mediasHTML, init: initMedias, nav: true },
   { key: 'shops', html: shopsHTML, init: initShops, nav: true },
@@ -39,7 +42,7 @@ app.innerHTML = `
   <main>
     <h1 class="sr-only">${esc(content.seo.title)}</h1>
     ${heroHTML(content, content.tagline)}
-    ${blocks.map((b) => `<div id="${slug(content[b.key].label)}" data-block="${b.key}">${b.html(content[b.key])}</div>`).join('')}
+    ${blocks.map((b) => `<div id="${b.key}" data-block="${b.key}">${b.html(content[b.key])}</div>`).join('')}
     ${footerHTML(content.footer)}
   </main>`;
 
@@ -56,7 +59,7 @@ blocks.forEach((b) => {
   const wrap = app.querySelector(`[data-block="${b.key}"]`);
   b.init(wrap.firstElementChild, content[b.key]);
 });
-initNav(app, blocks.filter((b) => b.nav).map((b) => content[b.key].label), { onHome: () => set('hero-reset', Date.now()) });
+initNav(app, blocks.filter((b) => b.nav).map((b) => ({ label: content[b.key].label, id: b.key })), { onHome: () => set('hero-reset', Date.now()) });
 
 // ImageOptimized behaviour: pictures fade in once their image has loaded.
 document.querySelectorAll('picture img').forEach((im) => {
