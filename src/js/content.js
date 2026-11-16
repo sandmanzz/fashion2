@@ -1,6 +1,6 @@
 // ---------------------------------------------------------------------------
 // SITE CONTENT — every text, image and video on the page comes from here.
-// Images point to /public/placeholders/*.svg; replace `src` with your files.
+// Images live in /public/images (site/, brand/, products/); swap a `src` to change one.
 // Videos are empty strings: drop an .mp4 in /public/videos and set the path,
 // until then the poster/placeholder image is shown (and scrubbed/zoomed).
 // ---------------------------------------------------------------------------
@@ -14,12 +14,12 @@ export default {
   "navigation": {
     "ctas": [
       {
-        "url": "#",
-        "label": "Shop\nBrand One"
+        "url": "/product.html?p=on-cropped-cardigan",
+        "label": "Shop\nWomen"
       },
       {
-        "url": "#",
-        "label": "Shop\nBrand Two"
+        "url": "/product.html?p=gyeol-chore-jacket",
+        "label": "Shop\nMen"
       }
     ]
   },
@@ -45,17 +45,17 @@ export default {
   },
   "shirts": {
     "label": "Products",
-    "title": "Placeholder headline, more than a product.",
+    "title": "More than a uniform, a quiet way of being.",
     "shirts": [
       {
         "video": "",
-        "image": "/placeholders/product-1.svg",
-        "column": "/placeholders/column.svg"
+        "image": "/images/products/gyeol-chore-jacket/cutout.webp",
+        "column": "/images/products/plinth.webp"
       },
       {
         "video": "",
-        "image": "/placeholders/product-2.svg",
-        "column": "/placeholders/column.svg"
+        "image": "/images/products/bit-oxford-shirt/cutout.webp",
+        "column": "/images/products/plinth.webp"
       }
     ]
   },
@@ -67,7 +67,7 @@ export default {
         "videoWebm": "",
         "videoMobile": "",
         "videoMobileWebm": "",
-        "poster": "/placeholders/video-chapter-1.svg",
+        "poster": "/images/posters/ch1.jpg",
         "chapter": {
           "label": "Chapter I",
           "title": "Chapter One",
@@ -108,7 +108,7 @@ export default {
                     "title": "First Name 2",
                     "text": "Role\nSubtitle",
                     "cta": {
-                      "url": "#",
+                      "url": "/product.html?p=gyeol-chore-jacket",
                       "label1": "Shop",
                       "label2": "the look",
                       "icon": "IconCart"
@@ -138,9 +138,9 @@ export default {
                 {
                   "alignment": "bottom",
                   "image": {
-                    "src": "/placeholders/img-05.svg",
-                    "width": 6336,
-                    "height": 9504,
+                    "src": "/images/site/00.webp",
+                    "width": 1280,
+                    "height": 1920,
                     "alt": null
                   },
                   "title": null,
@@ -153,7 +153,7 @@ export default {
                     "title": "First Name 4",
                     "text": "Role\nSubtitle",
                     "cta": {
-                      "url": "#",
+                      "url": "/product.html?p=bit-oxford-shirt",
                       "label1": "Shop",
                       "label2": "the look",
                       "icon": "IconCart"
@@ -174,7 +174,7 @@ export default {
               "item": {
                 "alignment": "bottom",
                 "image": {
-                  "src": "/placeholders/img-06.svg",
+                  "src": "/images/site/01.webp",
                   "width": 1920,
                   "height": 1280,
                   "alt": null
@@ -191,7 +191,7 @@ export default {
         "videoWebm": "",
         "videoMobile": "",
         "videoMobileWebm": "",
-        "poster": "/placeholders/video-chapter-2.svg",
+        "poster": "/images/posters/ch2.jpg",
         "chapter": {
           "label": "Chapter II",
           "title": "Chapter Two",
@@ -217,10 +217,10 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-08.svg",
-                    "width": 1750,
-                    "height": 2742,
-                    "alt": "Placeholder image"
+                    "src": "/images/site/02.webp",
+                    "width": 1280,
+                    "height": 1920,
+                    "alt": "ONDO campaign photo"
                   },
                   "title": "Magna aliqua",
                   "text": "Incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum lorem ipsum.",
@@ -232,7 +232,7 @@ export default {
                     "title": "First Name 6",
                     "text": "Role\nSubtitle",
                     "cta": {
-                      "url": "#",
+                      "url": "/product.html?p=jul-pleated-trouser",
                       "label1": "Shop",
                       "label2": "the look",
                       "icon": "IconCart"
@@ -255,10 +255,10 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-09.svg",
-                    "width": 3250,
-                    "height": 4875,
-                    "alt": "Placeholder image"
+                    "src": "/images/site/03.webp",
+                    "width": 1280,
+                    "height": 1920,
+                    "alt": "ONDO campaign photo"
                   },
                   "title": "Enim ad minim veniam",
                   "text": "Cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation.",
@@ -270,7 +270,7 @@ export default {
                     "title": "First Name 7",
                     "text": "Role\nSubtitle",
                     "cta": {
-                      "url": "#",
+                      "url": "/product.html?p=on-cropped-cardigan",
                       "label1": "Shop",
                       "label2": "the look",
                       "icon": "IconCart"
@@ -291,10 +291,10 @@ export default {
               "item": {
                 "alignment": "bottom",
                 "image": {
-                  "src": "/placeholders/img-10.svg",
-                  "width": 4000,
-                  "height": 2728,
-                  "alt": "Placeholder image"
+                  "src": "/images/site/04.webp",
+                  "width": 1920,
+                  "height": 1280,
+                  "alt": "ONDO campaign photo"
                 },
                 "title": "Quis nostrud",
                 "text": "Elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum lorem ipsum dolor sit amet."
@@ -308,7 +308,7 @@ export default {
         "videoWebm": "",
         "videoMobile": "",
         "videoMobileWebm": "",
-        "poster": "/placeholders/video-chapter-3.svg",
+        "poster": "/images/posters/ch3.jpg",
         "chapter": {
           "label": "Chapter III",
           "title": "Chapter Three",
@@ -321,9 +321,9 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-11.svg",
-                    "width": 2800,
-                    "height": 4585,
+                    "src": "/images/site/05.webp",
+                    "width": 1080,
+                    "height": 1920,
                     "alt": null
                   },
                   "title": "Ullamco laboris",
@@ -334,9 +334,9 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-12.svg",
-                    "width": 2500,
-                    "height": 3750,
+                    "src": "/images/site/06.webp",
+                    "width": 1280,
+                    "height": 1920,
                     "alt": null
                   },
                   "title": "Lorem ipsum dolor",
@@ -347,10 +347,10 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-13.svg",
-                    "width": 4000,
-                    "height": 2666,
-                    "alt": "Placeholder image"
+                    "src": "/images/site/07.webp",
+                    "width": 1920,
+                    "height": 1280,
+                    "alt": "ONDO campaign photo"
                   },
                   "title": null,
                   "text": null,
@@ -366,9 +366,9 @@ export default {
                 {
                   "alignment": "bottom",
                   "image": {
-                    "src": "/placeholders/img-14.svg",
-                    "width": 2048,
-                    "height": 1365,
+                    "src": "/images/site/08.webp",
+                    "width": 1920,
+                    "height": 1280,
                     "alt": null
                   },
                   "title": "Sit amet consectetur",
@@ -379,10 +379,10 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-15.svg",
-                    "width": 2500,
-                    "height": 3750,
-                    "alt": "Placeholder image"
+                    "src": "/images/site/09.webp",
+                    "width": 1280,
+                    "height": 1920,
+                    "alt": "ONDO campaign photo"
                   },
                   "title": null,
                   "text": null,
@@ -394,7 +394,7 @@ export default {
                     "title": "First Name 12",
                     "text": "Role\nSubtitle",
                     "cta": {
-                      "url": "#",
+                      "url": "/product.html?p=gyeol-chore-jacket",
                       "label1": "Shop",
                       "label2": "the look",
                       "icon": "IconCart"
@@ -417,10 +417,10 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-16.svg",
-                    "width": 3000,
-                    "height": 4500,
-                    "alt": "Placeholder image"
+                    "src": "/images/site/10.webp",
+                    "width": 1280,
+                    "height": 1920,
+                    "alt": "ONDO campaign photo"
                   },
                   "title": "Adipiscing elit sed",
                   "text": "Tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat.",
@@ -430,10 +430,10 @@ export default {
                 {
                   "alignment": "top",
                   "image": {
-                    "src": "/placeholders/img-17.svg",
-                    "width": 3333,
-                    "height": 5000,
-                    "alt": "Placeholder image"
+                    "src": "/images/site/11.webp",
+                    "width": 1280,
+                    "height": 1920,
+                    "alt": "ONDO campaign photo"
                   },
                   "title": null,
                   "text": null,
@@ -447,9 +447,9 @@ export default {
               "item": {
                 "alignment": "bottom",
                 "image": {
-                  "src": "/placeholders/img-18.svg",
-                  "width": 3500,
-                  "height": 2333,
+                  "src": "/images/site/12.webp",
+                  "width": 1920,
+                  "height": 1280,
                   "alt": null
                 },
                 "title": "Eiusmod tempor",
@@ -486,92 +486,92 @@ export default {
       "alt": "Placeholder image"
     },
     "imageMobile": {
-      "src": "/placeholders/img-61.svg",
-      "width": 2800,
-      "height": 4199,
-      "alt": "Placeholder image"
+      "src": "/images/site/13.webp",
+      "width": 1280,
+      "height": 1920,
+      "alt": "ONDO campaign photo"
     },
-    "text1": "Product\nName One",
-    "text2": "Product\nName Two",
+    "text1": "On Cropped\nCardigan",
+    "text2": "Gyeol Chore\nJacket",
     "cta1": {
-      "url": "#",
+      "url": "/product.html?p=on-cropped-cardigan",
       "label1": "View",
       "label2": "the product"
     },
     "cta2": {
-      "url": "#",
+      "url": "/product.html?p=gyeol-chore-jacket",
       "label1": "View",
       "label2": "the product"
     },
     "gallery": [
       {
-        "src": "/placeholders/img-62.svg",
-        "width": 2800,
-        "height": 4200,
-        "alt": "Placeholder image"
+        "src": "/images/site/14.webp",
+        "width": 1280,
+        "height": 1920,
+        "alt": "ONDO campaign photo"
       },
       {
-        "src": "/placeholders/img-63.svg",
-        "width": 2800,
-        "height": 4200,
-        "alt": "Placeholder image"
+        "src": "/images/site/15.webp",
+        "width": 1280,
+        "height": 1920,
+        "alt": "ONDO campaign photo"
       },
       {
-        "src": "/placeholders/img-64.svg",
-        "width": 3489,
-        "height": 5233,
+        "src": "/images/site/16.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null
       },
       {
-        "src": "/placeholders/img-65.svg",
-        "width": 2800,
-        "height": 4199,
-        "alt": "Placeholder image"
+        "src": "/images/site/17.webp",
+        "width": 1280,
+        "height": 1920,
+        "alt": "ONDO campaign photo"
       },
       {
-        "src": "/placeholders/img-66.svg",
-        "width": 2800,
-        "height": 4200,
-        "alt": "Placeholder image"
+        "src": "/images/site/18.webp",
+        "width": 1280,
+        "height": 1920,
+        "alt": "ONDO campaign photo"
       },
       {
-        "src": "/placeholders/img-67.svg",
-        "width": 2800,
-        "height": 4200,
-        "alt": "Placeholder image"
+        "src": "/images/site/19.webp",
+        "width": 1280,
+        "height": 1920,
+        "alt": "ONDO campaign photo"
       },
       {
-        "src": "/placeholders/img-68.svg",
-        "width": 2800,
-        "height": 4200,
-        "alt": "Placeholder image"
+        "src": "/images/site/20.webp",
+        "width": 1280,
+        "height": 1920,
+        "alt": "ONDO campaign photo"
       },
       {
-        "src": "/placeholders/img-69.svg",
-        "width": 2800,
-        "height": 4200,
-        "alt": "Placeholder image"
+        "src": "/images/site/21.webp",
+        "width": 1280,
+        "height": 1920,
+        "alt": "ONDO campaign photo"
       },
       {
-        "src": "/placeholders/img-70.svg",
-        "width": 2800,
-        "height": 4200,
-        "alt": "Placeholder image"
+        "src": "/images/site/22.webp",
+        "width": 1280,
+        "height": 1920,
+        "alt": "ONDO campaign photo"
       },
       {
-        "src": "/placeholders/img-71.svg",
-        "width": 2800,
-        "height": 4185,
-        "alt": "Placeholder image"
+        "src": "/images/site/23.webp",
+        "width": 1280,
+        "height": 1920,
+        "alt": "ONDO campaign photo"
       }
     ],
     "ctaShopTFC": {
-      "url": "#",
-      "label": "Shop Brand One"
+      "url": "/product.html?p=on-cropped-cardigan",
+      "label": "Shop women"
     },
     "ctaShopST": {
-      "url": "#",
-      "label": "Shop Brand Two"
+      "url": "/product.html?p=gyeol-chore-jacket",
+      "label": "Shop men"
     },
     "label": "Collection"
   },
@@ -621,40 +621,40 @@ export default {
     },
     "label": "Tickets",
     "video": "/videos/event.mp4",
-    "poster": "/placeholders/video-weekend.svg"
+    "poster": "/images/posters/event.jpg"
   },
   "medias": {
     "catchphrase": "Press",
     "items": [
       {
         "type": "image",
-        "src": "/placeholders/img-26.svg",
-        "width": 2832,
-        "height": 4240,
+        "src": "/images/site/26.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-27.svg",
-        "width": 2000,
-        "height": 3000,
+        "src": "/images/site/27.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-28.svg",
-        "width": 1500,
-        "height": 1000,
+        "src": "/images/site/28.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-29.svg",
-        "width": 1500,
-        "height": 2249,
+        "src": "/images/site/29.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": {
           "quote": "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt.",
@@ -665,17 +665,17 @@ export default {
       },
       {
         "type": "image",
-        "src": "/placeholders/img-30.svg",
-        "width": 1080,
-        "height": 1350,
+        "src": "/images/site/30.webp",
+        "width": 1440,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-31.svg",
-        "width": 2000,
-        "height": 2999,
+        "src": "/images/site/31.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": {
           "quote": "Dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.",
@@ -686,217 +686,217 @@ export default {
       },
       {
         "type": "image",
-        "src": "/placeholders/img-32.svg",
-        "width": 1080,
-        "height": 1350,
+        "src": "/images/site/32.webp",
+        "width": 1440,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-33.svg",
-        "width": 1500,
-        "height": 2245,
+        "src": "/images/site/33.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-34.svg",
-        "width": 2832,
-        "height": 3671,
-        "alt": "Placeholder image",
+        "src": "/images/site/34.webp",
+        "width": 1440,
+        "height": 1920,
+        "alt": "ONDO campaign photo",
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-35.svg",
-        "width": 1500,
-        "height": 2250,
+        "src": "/images/site/35.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-36.svg",
-        "width": 6347,
-        "height": 4206,
+        "src": "/images/site/36.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-37.svg",
-        "width": 1080,
-        "height": 1350,
+        "src": "/images/site/37.webp",
+        "width": 1440,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-38.svg",
-        "width": 1080,
-        "height": 1350,
+        "src": "/images/site/38.webp",
+        "width": 1440,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-39.svg",
-        "width": 5464,
-        "height": 8192,
+        "src": "/images/site/39.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-40.svg",
-        "width": 2966,
-        "height": 4449,
+        "src": "/images/site/40.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-41.svg",
-        "width": 2048,
-        "height": 1365,
+        "src": "/images/site/41.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-42.svg",
-        "width": 1606,
-        "height": 2300,
+        "src": "/images/site/42.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-43.svg",
-        "width": 2000,
-        "height": 1332,
+        "src": "/images/site/43.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-44.svg",
-        "width": 2100,
-        "height": 1400,
+        "src": "/images/site/44.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-45.svg",
-        "width": 2048,
-        "height": 1365,
+        "src": "/images/site/45.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-46.svg",
-        "width": 1680,
-        "height": 2521,
+        "src": "/images/site/46.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-47.svg",
-        "width": 1365,
-        "height": 2048,
+        "src": "/images/site/47.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-48.svg",
-        "width": 2000,
-        "height": 1332,
+        "src": "/images/site/48.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-49.svg",
-        "width": 1365,
-        "height": 2048,
+        "src": "/images/site/49.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-50.svg",
-        "width": 7135,
-        "height": 4757,
+        "src": "/images/site/50.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-51.svg",
-        "width": 3648,
-        "height": 5472,
+        "src": "/images/site/51.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-52.svg",
-        "width": 2500,
-        "height": 1666,
+        "src": "/images/site/52.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-53.svg",
-        "width": 894,
-        "height": 1450,
+        "src": "/images/site/53.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-54.svg",
-        "width": 1365,
-        "height": 2048,
+        "src": "/images/site/54.webp",
+        "width": 1280,
+        "height": 1920,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-55.svg",
-        "width": 2000,
-        "height": 1333,
+        "src": "/images/site/55.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-56.svg",
-        "width": 3000,
-        "height": 2000,
+        "src": "/images/site/56.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-57.svg",
-        "width": 2500,
-        "height": 1669,
+        "src": "/images/site/57.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       },
       {
         "type": "image",
-        "src": "/placeholders/img-58.svg",
-        "width": 2300,
-        "height": 1532,
+        "src": "/images/site/58.webp",
+        "width": 1920,
+        "height": 1280,
         "alt": null,
         "modal": null
       }
@@ -904,28 +904,28 @@ export default {
     "label": "Press"
   },
   "shops": {
-    "title1": "Lorem ipsum,",
-    "title2": "dolor sit",
-    "subtitle1": "Brand\nOne",
-    "subtitle2": "Brand\nTwo",
+    "title1": "Warmth in",
+    "title2": "everyday wear",
+    "subtitle1": "Seoul\nWomen",
+    "subtitle2": "Seoul\nMen",
     "image": {
       "src": "/images/brand/09-group.webp",
       "width": 1920,
-      "height": 1080,
+      "height": 939,
       "alt": "Placeholder image"
     },
     "shopTFC": {
-      "title": "Brand One",
+      "title": "Women",
       "image": {
-        "src": "/placeholders/img-24.svg",
-        "width": 2217,
-        "height": 2763,
-        "alt": "Placeholder image"
+        "src": "/images/site/24.webp",
+        "width": 1353,
+        "height": 1920,
+        "alt": "ONDO campaign photo"
       },
       "imageMobile": null,
       "cta": {
-        "url": "#",
-        "label": "Discover the shop"
+        "url": "/product.html?p=on-cropped-cardigan",
+        "label": "Discover women"
       },
       "link": {
         "url": "#",
@@ -936,7 +936,7 @@ export default {
         "label": "Website"
       },
       "socials": {
-        "label": "Follow Brand One",
+        "label": "Follow ONDO",
         "list": [
           {
             "type": "Instagram",
@@ -970,17 +970,17 @@ export default {
       }
     },
     "shopST": {
-      "title": "Brand Two",
+      "title": "Men",
       "image": {
-        "src": "/placeholders/img-25.svg",
-        "width": 2217,
-        "height": 2763,
-        "alt": "Placeholder image"
+        "src": "/images/site/25.webp",
+        "width": 1440,
+        "height": 1920,
+        "alt": "ONDO campaign photo"
       },
       "imageMobile": null,
       "cta": {
-        "url": "#",
-        "label": "Discover the shop"
+        "url": "/product.html?p=gyeol-chore-jacket",
+        "label": "Discover men"
       },
       "link": {
         "url": "#",
@@ -991,7 +991,7 @@ export default {
         "label": "Website"
       },
       "socials": {
-        "label": "Follow Brand Two",
+        "label": "Follow ONDO",
         "list": [
           {
             "type": "Twitter",

@@ -74,7 +74,8 @@ export function navHTML(content) {
 }
 
 /** labels: section labels shown in the menu (displayInNavigation). */
-export function initNav(root, labels, { onHome }) {
+export function initNav(root, labels, { onHome, external = false } = {}) {
+  const slugify = (t) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   const nav = root.querySelector('nav.nav');
   const trigger = root.querySelector('.nav__trigger');
   const toggle = nav.querySelector('.nav__header__toggle');
@@ -142,6 +143,7 @@ export function initNav(root, labels, { onHome }) {
   buttons.forEach((b, i) => {
     b.addEventListener('mouseenter', () => moveFollower(i));
     b.addEventListener('click', () => {
+      if (external) { location.href = '/#' + slugify(labels[i]); return; }
       forced = labels[i];
       moveFollower(i);
       setOpen(false);
@@ -153,6 +155,7 @@ export function initNav(root, labels, { onHome }) {
     });
   });
   nav.querySelectorAll('.nav__header__logo').forEach((a) => a.addEventListener('click', (e) => {
+    if (external) return;
     e.preventDefault();
     setOpen(false);
     gsap.to('main', { opacity: 0, duration: 0.4, ease: 'ease', onComplete: () => {

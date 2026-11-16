@@ -22,7 +22,7 @@ const easeIO = (t) => (t < 0.5 ? 2 * t * t : (4 - 2 * t) * t - 1);
 function buttonCircular({ label1, label2, url, icon: ic = 'IconCart' }) {
   const id = `bcirc${Math.random().toString(36).slice(2, 8)}`;
   const ico = { IconCart: icon.cart, IconArrow: icon.arrow }[ic] || icon.plus;
-  return `<a class="btn-circular" href="${esc(url || '#')}" target="_blank" rel="noopener noreferrer" aria-label="${esc([label1, label2].filter(Boolean).join(' '))}"><svg class="btn-circular__svg" viewBox="0 0 100 100"><defs><path id="${id}-circle" d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"/></defs>${label1 ? `<text><textPath href="#${id}-circle" startOffset="25%" text-anchor="middle">${esc(label1)}</textPath></text>` : ''}${label2 ? `<text><textPath href="#${id}-circle" startOffset="75%" text-anchor="middle">${esc(label2)}</textPath></text>` : ''}</svg><div class="btn-circular__icon">${ico()}</div></a>`;
+  return `<a class="btn-circular" href="${esc(url || '#')}"${(url || '').startsWith('/') ? '' : ' target="_blank" rel="noopener noreferrer"'} aria-label="${esc([label1, label2].filter(Boolean).join(' '))}"><svg class="btn-circular__svg" viewBox="0 0 100 100"><defs><path id="${id}-circle" d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"/></defs>${label1 ? `<text><textPath href="#${id}-circle" startOffset="25%" text-anchor="middle">${esc(label1)}</textPath></text>` : ''}${label2 ? `<text><textPath href="#${id}-circle" startOffset="75%" text-anchor="middle">${esc(label2)}</textPath></text>` : ''}</svg><div class="btn-circular__icon">${ico()}</div></a>`;
 }
 export { buttonCircular };
 

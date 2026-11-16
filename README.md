@@ -39,4 +39,13 @@ npm run build    # static site in dist/
 9. **Shops** – image grows, two shop cards.
 10. **Footer**.
 
+## Product detail page
+
+`/product.html?p=<slug>` — catalogue in `src/js/products.js` (4 products: Gyeol Chore Jacket 결, Bit Oxford Shirt 빛, Jul Pleated Trouser 줄, On Cropped Cardigan 온). Images in `public/images/products/<slug>/`. Same motion language as the home page: letter-rise title, grow-in gallery, sticky info, colour/size selectors, bag drawer (localStorage), "Worn with" cards with the circular cursor, scroll-driven script marquee.
+
+## Asset scripts
+
+- `scripts/process-videos.sh` — grade + encode AI clips for the site (all-intra scrub, ping-pong loops, brand film).
+- `scripts/place-site-photos.py` — convert generated photos to WebP and wire them into `content.js`.
+
 Code: `src/js/core/` (scroll, section progress, store, utils), `src/js/components/` (one module per block), `src/styles/main.css` (ported stylesheet).

@@ -10,7 +10,7 @@ import { esc, nl2br, isTablet, charAnim, nextTick } from '../core/utils.js';
 export function buttonPrimary({ label, url, variant = 'transparent', gtm, team, tag }) {
   const inner = `<div class="btn-primary__inner"><div class="btn-primary__icon">${icon.ornament()}</div><span class="btn-primary__placeholder">${nl2br(label)}</span><span class="btn-primary__text">${nl2br(label)}</span><div class="btn-primary__icon">${icon.ornament()}</div></div>`;
   const attrs = `class="btn-primary btn-primary--${variant}"${gtm ? ` data-gtm="${gtm}"` : ''}${team ? ` team="${team}"` : ''}`;
-  if (url && tag !== 'button') return `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" ${attrs}>${inner}</a>`;
+  if (url && tag !== 'button') return `<a href="${esc(url)}"${url.startsWith('/') ? '' : ' target="_blank" rel="noopener noreferrer"'} ${attrs}>${inner}</a>`;
   return `<button type="button" ${attrs}>${inner}</button>`;
 }
 
@@ -141,7 +141,7 @@ function ringText(label, center, id, cls) {
 export function buttonCursor({ label1, label2, icon: ic, url, tag = 'div', blend = false, cls = '' }) {
   const id = `bc${++uid}`;
   const t = url ? 'a' : tag;
-  const attrs = url ? ` href="${esc(url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc([label1, label2].filter(Boolean).join(' ') || 'Link')}"` : t === 'button' ? ' type="button"' : '';
+  const attrs = url ? ` href="${esc(url)}"${url.startsWith('/') ? '' : ' target="_blank" rel="noopener noreferrer"'} aria-label="${esc([label1, label2].filter(Boolean).join(' ') || 'Link')}"` : t === 'button' ? ' type="button"' : '';
   const svg = label1 || label2 ? `<svg class="btn-cursor__svg" viewBox="0 0 100 100"><defs><path id="${id}-circle" d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"/></defs><g class="btn-cursor__l1">${ringText(label1, 25, id, 'c1')}</g><g class="btn-cursor__l2">${ringText(label2, 75, id, 'c2')}</g></svg>` : '';
   return `<${t} class="btn-cursor${blend ? ' btn-cursor--blend' : ''} ${cls}" data-cid="${id}"${attrs}>${svg}<span class="btn-cursor__border"></span><div class="btn-cursor__icon">${iconFor(ic)}</div></${t}>`;
 }

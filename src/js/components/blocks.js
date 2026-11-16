@@ -234,7 +234,7 @@ export function initCollection(root, d) {
   const followers = [];
   root.querySelectorAll('.block-collection__images .mouse-follower').forEach((m, i) => {
     const cta = i === 0 ? d.cta1 : d.cta2;
-    const f = initMouseFollower(m, { reveal: false, onClick: () => window.open(cta.url, '_blank') });
+    const f = initMouseFollower(m, { reveal: false, onClick: () => (cta.url.startsWith('/') ? (location.href = cta.url) : window.open(cta.url, '_blank')) });
     f.setFrozen(true);
     followers.push(f);
   });
