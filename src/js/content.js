@@ -32,12 +32,12 @@ export default {
   "hero": {
     "label": "Intro",
     "intro": {
-      "video": "",
+      "video": "/videos/hero-intro.mp4",
       "poster": "/images/brand/01-hero-street.webp",
       "ctaPrimary": "Enter"
     },
     "scroll": {
-      "video": "",
+      "video": "/videos/hero-scroll.mp4",
       "poster": "/images/brand/02-store-entrance.webp",
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua: ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor.",
       "label": "Scroll"
@@ -63,7 +63,7 @@ export default {
     "label": "Story",
     "archs": [
       {
-        "video": "",
+        "video": "/videos/ch1.mp4",
         "videoWebm": "",
         "videoMobile": "",
         "videoMobileWebm": "",
@@ -187,7 +187,7 @@ export default {
         }
       },
       {
-        "video": "",
+        "video": "/videos/ch2.mp4",
         "videoWebm": "",
         "videoMobile": "",
         "videoMobileWebm": "",
@@ -304,7 +304,7 @@ export default {
         }
       },
       {
-        "video": "",
+        "video": "/videos/ch3.mp4",
         "videoWebm": "",
         "videoMobile": "",
         "videoMobileWebm": "",
@@ -465,9 +465,10 @@ export default {
     "label": "Film",
     "cursorLabel1": "Watch the film",
     "cursorLabel2": "Watch the film",
-    "video": "",
+    "video": "/videos/film.mp4",
     "videoMobile": "",
-    "poster": "/images/brand/10-rooftop.webp"
+    "poster": "/images/brand/10-rooftop.webp",
+    "teaser": "/videos/film-teaser.mp4"
   },
   "collection": {
     "title1": "Discover",
@@ -619,7 +620,7 @@ export default {
       ]
     },
     "label": "Tickets",
-    "video": "",
+    "video": "/videos/event.mp4",
     "poster": "/placeholders/video-weekend.svg"
   },
   "medias": {
