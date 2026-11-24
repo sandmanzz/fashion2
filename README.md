@@ -223,6 +223,23 @@ Switch via the pill or `?ui=v1|v2` (`src/js/ui-version.js`, sets `<html data-ui>
 | Top navigation | Logo box (A ≡ B) | Removed; minimal "MENU" pill top-right |
 | First chapter item | Starts at left edge | Pushed right & down so it is seen whole before moving |
 
+### V3 — Atelier (`?ui=v3`)
+Homepage only (`src/v3/home.js`, `src/v3/v3.css`; entry switch in `src/entry.js`). Sub-pages reuse the V2 look for now.
+The page follows one garment through the workroom, on native scroll (no pinned horizontal tracks, no repeated grow-in):
+
+| Station | Interaction |
+|---|---|
+| Hero | Split editorial headline + atelier photo with a swinging hang tag |
+| 01 원단 Cloth | Swatch board: pinned, pinking-shear-edged swatches |
+| 02 재단 Cut | 8 collections as dashed pattern pieces; scissors travel along the cut on hover |
+| 03 봉제 Sewn | Clothes rail of all products: drag to browse, category filters, hover shows the model shot |
+| 04 착용 Worn | Film contact sheet of the campaign, click opens a lightbox |
+| 05 수선 Repaired | Worn/repaired before-after slider, counters, front-end repair ticket |
+| Footer | Care label |
+
+Signatures: a red stitch line that is sewn down the page as you scroll, a tailor's ruler (cm) as scroll indicator, and a receipt-strip top bar.
+Catalogue grew from 4 to 12 products (8 new, 4 images each, AI-generated to match the house style).
+
 ---
 
 ## 9. Bilingual (EN / KO)
