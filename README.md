@@ -177,6 +177,7 @@ Order is defined in the `blocks` array of `src/main.js`.
 | video | `components/blocks.js` (film) | Film teaser grows 44%→100%, circular cursor opens a full-screen player with the brand film |
 | collection | blocks.js | Two looks grow open, gallery drifts, emblem rotates, shop CTAs |
 | collections | `components/collections.js` | Grid of the 8 collections, clip/scale grow-in, cursor "Explore" |
+| pieces | `components/pieces.js` | All 12 products: same grow-in + cursor, hover shows the model shot, category filter chips |
 | weekend | blocks.js | Events (Open Studio, Mending Day): scrubbed video grows full-screen, tickets scroll over |
 | medias | blocks.js | Journal wall: horizontal wave-scroll of 15 images, quote modals |
 | shops | blocks.js | Group image grows, Women / Men shop cards |
@@ -237,6 +238,7 @@ The page follows one garment through the workroom, on native scroll (no pinned h
 | 05 수선 Repaired | Worn/repaired before-after slider, counters, front-end repair ticket |
 | Footer | Care label |
 
+Scroll runs on the same Lenis clock as V1/V2; parallax: hero photo, floating swatches, photos sliding inside pattern pieces, contact sheet pulled sideways, headline lines leaving the hero.
 Signatures: a red stitch line that is sewn down the page as you scroll, a tailor's ruler (cm) as scroll indicator, and a receipt-strip top bar.
 Catalogue grew from 4 to 12 products (8 new, 4 images each, AI-generated to match the house style).
 

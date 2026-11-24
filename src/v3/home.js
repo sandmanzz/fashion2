@@ -14,6 +14,7 @@ import { mountSwitcher } from '../js/ui-version.js';
 import products, { formatPrice } from '../js/products.js';
 import collections from '../js/collections.js';
 import { esc } from '../js/core/utils.js';
+import { scroll, setVh } from '../js/core/scroll.js';
 
 const T = (en, ko) => (LANG === 'ko' ? ko : en);
 const ko = LANG === 'ko';
@@ -69,7 +70,7 @@ const html = `
       <p class="v3-hero__sub">${T('Follow one garment through our atelier — from a bolt of cloth to its third repair.', '원단 한 필에서 세 번째 수선까지, 한 벌의 옷이 작업실을 지나는 길을 따라가 보세요.')}</p>
       <a class="v3-btn" href="#cloth">${T('Start at the cutting table', '재단대에서 시작하기')} ↓</a>
     </div>
-    <figure class="v3-hero__media">
+    <figure class="v3-hero__media" data-speed="-0.12">
       <img src="/images/brand/06-atelier.webp" alt="${T('The ONDO atelier', '온도 작업실')}">
       <figcaption class="v3-tag v3-tag--pinned">
         <span class="v3-tag__hole"></span>
@@ -80,7 +81,7 @@ const html = `
 
   <section id="cloth" class="v3-st v3-cloth" data-station="cloth">
     ${stationHead(STATIONS[0], T('Start with cloth you can feel.', '손끝으로 느껴지는 원단에서 시작합니다.'), T('Every piece begins on this board. We pick heavy, honest materials that soften instead of wearing out.', '모든 옷은 이 보드에서 시작합니다. 닳기보다 부드러워지는, 무겁고 정직한 소재를 고릅니다.'))}
-    <div class="swatch-board">
+    <div class="swatch-board" data-drift>
       ${SWATCHES.map(([img, en, k, note], i) => `
         <figure class="swatch" style="--r:${[-2.5, 1.5, -1, 2.2, -1.8, 1][i]}deg">
           <span class="swatch__pin"></span>
@@ -97,7 +98,7 @@ const html = `
         <a class="pattern" href="/collection.html?c=${c.slug}" style="--i:${i}">
           <svg class="pattern__cut" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="1" y="1" width="98" height="98" rx="1" /></svg>
           <span class="pattern__no">${String(i + 1).padStart(2, '0')} / 08</span>
-          <div class="pattern__img"><img src="${c.cover}" alt="" loading="lazy"></div>
+          <div class="pattern__img"><img data-inner src="${c.cover}" alt="" loading="lazy"></div>
           <div class="pattern__txt">
             <b lang="ko">${c.korean}</b>
             <span class="pattern__name">${esc(c.name)}</span>
@@ -134,7 +135,7 @@ const html = `
 
   <section id="worn" class="v3-st v3-worn" data-station="worn">
     ${stationHead(STATIONS[3], T('Then it leaves the room.', '그리고 작업실을 떠납니다.'), T('Contact sheet from a week in Seoul. Click a frame.', '서울에서의 일주일, 밀착 인화지. 프레임을 눌러보세요.'))}
-    <div class="contact">
+    <div class="contact" data-slide>
       <div class="contact__strip">${'<i></i>'.repeat(24)}</div>
       <div class="contact__grid">
         ${LOOKS.map((l, i) => `<button class="frame" style="--t:${[-1, 0.6, -0.4, 1.1, -0.8, 0.3, 0.9, -0.5][i]}deg"><img src="/images/brand/${l}.webp" alt="" loading="lazy"><span>${String(i + 12).padStart(2, '0')}A</span></button>`).join('')}
@@ -246,8 +247,56 @@ function onScroll() {
   cursor.firstElementChild.textContent = Math.round(p * 100);
   root.style.setProperty('--p', p.toFixed(3));
 }
-addEventListener('scroll', () => requestAnimationFrame(onScroll), { passive: true });
-addEventListener('resize', drawThread);
+addEventListener('scroll', onScroll, { passive: true });
+// ---- scrollcraft: Lenis smooth scroll (same feel as V1/V2) drives everything
+setVh();
+scroll.init();
+scroll.watch(onScroll);
+$$('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+  const el = document.querySelector(a.getAttribute('href'));
+  if (!el) return;
+  e.preventDefault();
+  scroll.scrollTo(el, { offset: -60, duration: 1.6 });
+}));
+
+const speedEls = $$('[data-speed]');
+const innerImgs = $$('[data-inner]');
+const swatches = $$('[data-drift] .swatch');
+const contact = $('[data-slide]');
+const heroLines = $$('.v3-hero__title .line');
+function parallax() {
+  const vh = innerHeight;
+  speedEls.forEach((el) => {
+    const r = el.getBoundingClientRect();
+    const c = r.top + r.height / 2 - vh / 2;
+    el.style.transform = `translate3d(0, ${(c * +el.dataset.speed).toFixed(1)}px, 0)`;
+  });
+  // hero headline slides away line by line as you leave the hero
+  const hp = Math.min(1, Math.max(0, scrollY / vh));
+  heroLines.forEach((l, i) => { l.style.transform = `translate3d(${(-hp * 60 * (i + 1)).toFixed(1)}px, 0, 0)`; l.style.opacity = String(1 - hp * 0.8); });
+  // swatches float at different rates (pinned on the board, not glued)
+  swatches.forEach((sw, i) => {
+    const r = sw.getBoundingClientRect();
+    const c = (r.top + r.height / 2 - vh / 2) / vh;
+    sw.style.translate = `0 ${(c * [30, -20, 45, -35, 25, -15][i % 6]).toFixed(1)}px`;
+  });
+  // pattern photos slide inside their cut lines
+  innerImgs.forEach((im) => {
+    const r = im.parentElement.getBoundingClientRect();
+    const c = (r.top + r.height / 2 - vh / 2) / vh;
+    im.style.transform = `scale(1.15) translate3d(0, ${(c * -8).toFixed(2)}%, 0)`;
+  });
+  // the contact sheet is pulled across the light table
+  if (contact) {
+    const r = contact.getBoundingClientRect();
+    const c = (r.top + r.height / 2 - vh / 2) / vh;
+    contact.style.transform = `translate3d(${(c * 80).toFixed(1)}px, 0, 0) rotate(${(-0.4 + c * 1.2).toFixed(2)}deg)`;
+  }
+}
+scroll.watch(parallax);
+addEventListener('scroll', parallax, { passive: true });
+parallax();
+addEventListener('resize', () => { setVh(); drawThread(); scroll.resize(); });
 addEventListener('load', drawThread);
 drawThread();
 

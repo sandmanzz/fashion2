@@ -62,3 +62,15 @@ html[lang='ko'] h2, html[lang='ko'] h3 { word-break: keep-all; }
 .ticket__inner__row__name span { overflow-wrap: anywhere; }
 html[lang='ko'] .ticket__inner__row__name span { font-size: clamp(1.4rem, 1.4rem + 0.012 * (100vw - 402px), 2.4rem); letter-spacing: 0; }
 .ticket__inner__row__logos svg { color: var(--color-dark-gold); }
+
+/* "The Pieces" (home, V1/V2) */
+.piece__media { position: relative; }
+.piece__media img { position: absolute; inset: 0; }
+.piece__media .piece__alt { opacity: 0; object-position: top; transition: opacity 0.6s ease; }
+.piece:hover .piece__alt { opacity: 1; }
+.piece[hidden] { display: none; }
+.pieces__filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+.pieces__filters button { font-family: var(--font-display); letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.9rem; padding: 0.45rem 1rem; border: 1px solid var(--color-dark-gray); border-radius: 999px; color: var(--color-dark-gray); transition: background 0.3s, color 0.3s; }
+.pieces__filters button sup { font-size: 0.6rem; margin-left: 0.2rem; }
+.pieces__filters button.is-on, .pieces__filters button:hover { background: var(--color-dark-gray); color: var(--color-light-gold); }
+html[data-ui="v2"] .pieces__filters button { border-radius: 999px; }

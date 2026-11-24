@@ -16,6 +16,7 @@ import {
 } from './js/components/blocks.js';
 import { esc } from './js/core/utils.js';
 import { collectionsHTML, initCollections } from './js/components/collections.js';
+import { piecesHTML, initPieces } from './js/components/pieces.js';
 import { materialsHTML, initMaterials } from './js/components/materials.js';
 import { isV2 } from './js/ui-version.js';
 import './styles/materials.css';
@@ -30,6 +31,7 @@ const blocks = [
   { key: 'video', html: filmHTML, init: initFilm, nav: false },
   { key: 'collection', html: collectionHTML, init: initCollection, nav: true },
   { key: 'collections', html: collectionsHTML, init: initCollections, nav: true },
+  { key: 'pieces', html: piecesHTML, init: initPieces, nav: true },
   { key: 'weekend', html: weekendHTML, init: initWeekend, nav: true },
   { key: 'medias', html: mediasHTML, init: initMedias, nav: true },
   { key: 'shops', html: shopsHTML, init: initShops, nav: true },

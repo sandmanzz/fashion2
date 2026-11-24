@@ -1367,6 +1367,11 @@ export default {
       "ko": "매장"
     }
   },
+  "pieces": {
+    "label": { "en": "Pieces", "ko": "제품" },
+    "title": { "en": "The pieces", "ko": "온도의 옷들" },
+    "intro": { "en": "Twelve garments, each named by one Korean word. Cut in Seoul, worn for years, repaired for life.", "ko": "하나의 한국어 단어로 이름 지은 열두 벌의 옷. 서울에서 재단하고, 오래 입고, 평생 고쳐 입습니다." }
+  },
   "collections": {
     "label": {
       "en": "Collections",
